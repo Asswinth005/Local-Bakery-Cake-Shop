@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing · The Daily Dough | Artisan Bakery & Cake Shop</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='78' font-size='78' text-anchor='middle'%3E🧁%3C/text%3E%3C/svg%3E">
+    <meta name="description" content="Pricing for artisan breads, pastries, cakes, and custom orders at The Daily Dough bakery.">
+
+    <!-- Tailwind CSS -->
+    <script src="tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'bakery': '#D97A4A',
+                        'bakery-dark': '#B45F3A',
+                        'bakery-light': '#F0C9A0',
+                        'bakery-glow': '#F7D9B0',
+                        'cream': '#FEF7F0',
+                        'canvas-light': '#FDF8F2',
+                        'canvas-dark': '#1E1A17',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Syne', 'sans-serif'],
+                        'mono': ['Space Mono', 'monospace'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'shimmer': 'shimmer 3s linear infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'marquee': 'marquee 20s linear infinite',
+                        'scale-up': 'scaleUp 0.5s ease-out',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'spin-slow': 'spinSlow 10s linear infinite',
+                        'bounce-gentle': 'bounceGentle 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: { '0%, 100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-15px)' } },
+                        shimmer: { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+                        marquee: { '0%': { transform: 'translateX(0%)' }, '100%': { transform: 'translateX(-50%)' } },
+                        scaleUp: { '0%': { transform: 'scale(0.95)', opacity: '0' }, '100%': { transform: 'scale(1)', opacity: '1' } },
+                        fadeInUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                        spinSlow: { '0%': { transform: 'rotate(0deg)' }, '100%': { transform: 'rotate(360deg)' } },
+                        bounceGentle: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; scrollbar-width: none; -ms-overflow-style: none; }
+        body::-webkit-scrollbar { display: none; }
+
+        /* Navigation */
+        .nav-item { position: relative; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.02em; transition: color 0.3s; padding: 0.5rem 0; }
+        .nav-item:hover, .nav-item.active { color: #D97A4A; }
+        .nav-item.active { font-weight: 700; }
+        .nav-item::after { content: ''; position: absolute; bottom: 0; inset-inline-start: 0; width: 0; height: 2px; background: #D97A4A; transition: width 0.3s; }
+        .nav-item:hover::after { width: 100%; }
+        .dropdown { position: relative; }
+        .dropdown-menu { position: absolute; top: 100%; inset-inline-start: 0; min-width: 200px; background: #FFFFFF; border-radius: 16px; padding: 0.5rem 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; z-index: 1000; border: 1px solid #D97A4A30; box-shadow: 0 15px 35px rgba(0,0,0,0.08); text-align: start; }
+        .dropdown-menu.dropdown-right { inset-inline-start: auto; inset-inline-end: 0; }
+        .dark .dropdown-menu { background: #1E1A17; border-color: #D97A4A40; }
+        .dropdown:hover .dropdown-menu, .dropdown.open .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-item { display: flex; align-items: center; padding: 0.6rem 1.2rem; gap: 10px; transition: all 0.2s; font-size: 0.85rem; }
+        .dropdown-item:hover { background: #D97A4A10; color: #D97A4A; padding-inline-start: 1.5rem; }
+        .dropdown-item.active { background: #D97A4A08; color: #D97A4A; font-weight: 700; border-inline-start: 3px solid #D97A4A; padding-inline-start: 1.5rem; }
+        .dropdown-item i { width: 18px; color: #D97A4A; }
+        .auth-btn { padding: 0.5rem 1.5rem; border-radius: 40px; font-weight: 500; font-size: 0.85rem; transition: all 0.3s; }
+        .auth-btn.login { background: transparent; border: 1.5px solid #D97A4A; color: #D97A4A; }
+        .auth-btn.login:hover { background: #D97A4A; color: white; }
+        .auth-btn.signup { background: #D97A4A; color: white; }
+        .auth-btn.signup:hover { background: #B45F3A; transform: translateY(-2px); }
+        .toggle-btn { width: 36px; height: 36px; border-radius: 40px; background: #F0EDE8; color: #D97A4A; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+        .dark .toggle-btn { background: #2A2520; color: #FFFFFF; }
+        .toggle-btn:hover, .toggle-btn.active { background: #D97A4A; color: white; transform: rotate(10deg); }
+
+        .btn-primary { background: #D97A4A; color: white; padding: 0.8rem 2rem; border-radius: 60px; font-weight: 600; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-primary:hover { background: #B45F3A; transform: scale(1.03); }
+        .btn-outline { border: 2px solid #D97A4A; background: transparent; color: #D97A4A; padding: 0.75rem 2rem; border-radius: 60px; font-weight: 600; transition: all 0.3s; }
+        .btn-outline:hover { background: #D97A4A; color: white; }
+
+        .social-icon { width: 40px; height: 40px; background: #2A2520; display: inline-flex; align-items: center; justify-content: center; border-radius: 60px; transition: all 0.3s; color: #D97A4A; }
+        .social-icon:hover { background: #D97A4A; color: white; transform: translateY(-3px); }
+
+        .mobile-menu { background: #FFFFFF; max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+        .dark .mobile-menu { background: #1E1A17; }
+        .mobile-menu.open { max-height: 80vh; overflow-y: auto; }
+        .mobile-menu-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #E8E4DF; font-weight: 500; transition: all 0.3s; text-align: start; }
+        .dark .mobile-menu-item { border-bottom-color: #2A2520; }
+        .mobile-menu-item.active, .mobile-dropdown-content a.active { border-inline-start: 4px solid #D97A4A; border-left: none; background: #D97A4A08; color: #D97A4A; font-weight: 700; }
+        .mobile-dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.3s; background: #F8F4EF; text-align: start; }
+        .dark .mobile-dropdown-content { background: #1E1A17; }
+        .mobile-dropdown-content.show { max-height: 180px; }
+
+        [dir="rtl"] .fa-arrow-right, [dir="rtl"] .fa-chevron-right { transform: scaleX(-1); }
+        [dir="rtl"] .fa-arrow-left, [dir="rtl"] .fa-chevron-left { transform: scaleX(-1); }
+
+        .footer-heading { position: relative; padding-bottom: 0.5rem; display: inline-block; }
+        @media (min-width: 768px) { .footer-heading { display: block; padding-bottom: 0; border-inline-start: 3px solid #D97A4A; padding-inline-start: 0.75rem; } }
+        .footer-contact-item { display: flex; gap: 0.75rem; align-items: center; }
+        .footer-contact-item i { width: 20px; color: #D97A4A; }
+
+        /* Pricing card specific */
+        .pricing-card {
+            background: #FFFFFF;
+            border-radius: 32px;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            overflow: hidden;
+            box-shadow: 0 8px 24px -6px rgba(0,0,0,0.05);
+            border: 1px solid rgba(217, 122, 74, 0.08);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+        .pricing-card .btn-outline,
+        .pricing-card .btn-primary {
+            margin-top: auto;
+            white-space: nowrap;
+        }
+        .dark .pricing-card {
+            background: #1E1A17;
+            box-shadow: 0 8px 24px -6px rgba(0,0,0,0.4);
+            border-color: rgba(217, 122, 74, 0.15);
+        }
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 40px -12px #D97A4A30;
+            border-color: #D97A4A40;
+        }
+        .pricing-card.popular {
+            border-color: #D97A4A;
+            border-width: 2px;
+        }
+        .pricing-card .popular-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #D97A4A;
+            color: white;
+            padding: 0.3rem 1.2rem;
+            border-radius: 0 28px 0 28px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .dark .pricing-card .popular-badge {
+            color: #1E1A17;
+        }
+
+        .shimmer-text {
+            background: linear-gradient(120deg, #D97A4A, #F0C9A0, #D97A4A, #B45F3A);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
+
+        .hero-pricing {
+            background: linear-gradient(160deg, #FDF8F2 0%, #E8D5C4 100%);
+        }
+        .dark .hero-pricing {
+            background: linear-gradient(160deg, #1E1A17 0%, #14110F 100%);
+        }
+
+        .price-tag {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.4rem 0;
+        }
+        .feature-item i {
+            color: #D97A4A;
+            font-size: 0.9rem;
+            width: 1.25rem;
+        }
+        .feature-item .fa-times {
+            color: #9CA3AF;
+        }
+        .dark .feature-item .fa-times {
+            color: #6B7280;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(217, 122, 74, 0.08);
+        }
+        .dark .table-row {
+            border-bottom-color: rgba(217, 122, 74, 0.12);
+        }
+        .table-row.header {
+            font-weight: 700;
+            color: #D97A4A;
+            border-bottom: 2px solid #D97A4A;
+        }
+        .table-row .item-name {
+            font-weight: 500;
+        }
+        .table-row .price-cell {
+            font-weight: 600;
+            color: #D97A4A;
+        }
+        .dark .table-row .price-cell {
+            color: #D97A4A;
+        }
+
+        @media (max-width: 640px) {
+            .table-row {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 0.5rem;
+            }
+            .table-row.header .hide-mobile {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-canvas-light dark:bg-canvas-dark text-gray-900 dark:text-gray-100">
+
+<!-- ====== HEADER (exactly as reference) ====== -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-canvas-dark/95 backdrop-blur-md border-b border-bakery/30">
+    <div class="container mx-auto px-6">
+        <div class="flex items-center justify-between h-20 relative">
+            <a href="index.html" class="flex items-center group">
+                <div class="bg-white dark:bg-[#1E1A17] px-5 py-2 rounded-full flex items-center shadow-sm border border-bakery/25 group-hover:border-bakery transition-all duration-300 gap-3">
+                    <div class="w-7 h-7 rounded-full bg-bakery/15 dark:bg-bakery/25 flex items-center justify-center text-bakery dark:text-bakery-light text-xs shrink-0">
+                        <i class="fas fa-bread-slice"></i>
+                    </div>
+                    <span class="text-base font-sans font-bold text-gray-900 dark:text-white tracking-tight whitespace-nowrap" style="font-family: 'Inter', system-ui, sans-serif !important;">The Daily <span class="text-bakery">Dough</span></span>
+                </div>
+            </a>
+
+            <!-- desktop nav -->
+            <div class="hidden xl:flex items-center justify-center absolute left-1/2 -translate-x-1/2">
+                <div class="flex items-center gap-7">
+                    <div class="dropdown">
+                        <button class="nav-item flex items-center gap-1">Home <i class="fas fa-chevron-down text-[10px]"></i></button>
+                        <div class="dropdown-menu">
+                            <a href="index.html" class="dropdown-item">Home 1</a>
+                            <a href="home2.html" class="dropdown-item">Home 2</a>
+                        </div>
+                    </div>
+                    <a href="about.html" class="nav-item">About</a>
+                    <div class="dropdown">
+                        <button class="nav-item flex items-center gap-1">Products <i class="fas fa-chevron-down text-[10px]"></i></button>
+                        <div class="dropdown-menu">
+                            <a href="signature-cakes.html" class="dropdown-item">Signature Cakes</a>
+                            <a href="fresh-pastries.html" class="dropdown-item">Fresh Pastries</a>
+                            <a href="artisan-breads.html" class="dropdown-item">Artisan Breads</a>
+                        </div>
+                    </div>
+                    <a href="pricing.html" class="nav-item active">Pricing</a>
+                    <a href="custom-orders.html" class="nav-item">Custom Orders</a>
+                    <a href="contact.html" class="nav-item">Contact</a>
+                </div>
+            </div>
+
+            <div class="hidden xl:flex items-center gap-3 ms-auto me-4">
+                <button id="theme-toggle" class="toggle-btn" title="Toggle theme"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+                <button id="rtl-toggle" class="toggle-btn" title="Toggle RTL">⇄</button>
+                <div class="dropdown">
+                    <button class="toggle-btn flex items-center justify-center text-lg" title="Account authentication">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-right !min-w-[170px] shadow-xl">
+                        <a href="login.html" class="dropdown-item">Login</a>
+                        <a href="signup.html" class="dropdown-item">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+            <button id="mobile-toggle" class="xl:hidden text-gray-800 dark:text-white p-2 text-2xl"><i class="fas fa-bars"></i></button>
+        </div>
+
+        <!-- mobile menu -->
+        <div id="mobile-menu" class="mobile-menu xl:hidden">
+            <div class="mobile-dropdown">
+                <button class="mobile-dropdown-btn flex justify-between items-center w-full mobile-menu-item">Home <i class="fas fa-chevron-down text-xs"></i></button>
+                <div class="mobile-dropdown-content">
+                    <a href="index.html" class="block px-8 py-2 text-sm">Home 1</a>
+                    <a href="home2.html" class="block px-8 py-2 text-sm">Home 2</a>
+                </div>
+            </div>
+            <a href="about.html" class="mobile-menu-item">About</a>
+            <div class="mobile-dropdown">
+                <button class="mobile-dropdown-btn flex justify-between items-center w-full mobile-menu-item">Products <i class="fas fa-chevron-down text-xs"></i></button>
+                <div class="mobile-dropdown-content">
+                    <a href="signature-cakes.html" class="block px-8 py-2 text-sm">Signature Cakes</a>
+                    <a href="fresh-pastries.html" class="block px-8 py-2 text-sm">Fresh Pastries</a>
+                    <a href="artisan-breads.html" class="block px-8 py-2 text-sm">Artisan Breads</a>
+                </div>
+            </div>
+            <a href="pricing.html" class="mobile-menu-item active">Pricing</a>
+            <a href="custom-orders.html" class="mobile-menu-item">Custom Orders</a>
+            <a href="contact.html" class="mobile-menu-item">Contact</a>
+            <div class="p-4 px-6 border-t border-bakery/20 space-y-3">
+                <div class="flex items-center gap-3">
+                    <a href="login.html" class="auth-btn login flex-1 text-center py-2 text-xs font-semibold">Login</a>
+                    <a href="signup.html" class="auth-btn signup flex-1 text-center py-2 text-xs font-semibold">Sign Up</a>
+                </div>
+                <div class="flex items-center justify-center gap-3 pt-1">
+                    <button id="theme-toggle-mobile" class="toggle-btn" title="Toggle theme"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+                    <button id="rtl-toggle-mobile" class="toggle-btn" title="Toggle RTL">⇄</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ====== HERO ====== -->
+<section class="hero-pricing min-h-[48vh] flex items-center justify-center pt-36 pb-24 md:pt-44 md:pb-32 overflow-hidden relative">
+    <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+    <img src="assets/h1.jpg" alt="Hero background" class="w-full h-full object-cover opacity-15 dark:opacity-20 scale-105">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#FDF8F2]/88 via-[#FDF8F2]/78 to-[#FDF8F2] dark:from-[#1E1A17]/88 dark:via-[#1E1A17]/82 dark:to-[#1E1A17]"></div>
+  </div>
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="text-center max-w-3xl mx-auto">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-bakery/10 border border-bakery/20 text-bakery text-xs font-mono font-bold tracking-widest uppercase">
+                <i class="fas fa-tag"></i> Transparent Pricing
+            </span>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mt-4 leading-[1.1]">
+                Quality you can <span class="shimmer-text">taste</span>
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300 mt-4 max-w-xl mx-auto leading-relaxed">
+                Simple, honest pricing for our artisan breads, pastries, cakes, and custom orders. No hidden fees — just deliciousness.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ====== PRICING PLANS ====== -->
+<section class="py-16 bg-white dark:bg-[#161210]">
+    <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-3 gap-5 lg:gap-8 max-w-6xl mx-auto items-stretch">
+            
+            <!-- Plan 1 - Single -->
+            <div class="pricing-card p-6 lg:p-8 text-center animate-fade-in-up flex flex-col justify-between h-full" style="animation-delay: 0.05s;">
+                <div>
+                    <div class="mb-6">
+                        <div class="w-16 h-16 bg-bakery/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-bread-slice text-bakery text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Single</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Perfect for one</p>
+                    </div>
+                    <div class="mb-6">
+                        <span class="text-4xl lg:text-5xl font-bold text-bakery price-tag">$4</span>
+                        <span class="text-gray-500 dark:text-gray-400 text-xs lg:text-sm">/ item</span>
+                    </div>
+                    <ul class="text-left space-y-2 mb-8 text-xs lg:text-sm">
+                        <li class="feature-item"><i class="fas fa-check"></i> One pastry or bread</li>
+                        <li class="feature-item"><i class="fas fa-check"></i> Fresh daily</li>
+                        <li class="feature-item"><i class="fas fa-times"></i> <span class="text-gray-400">Custom order</span></li>
+                        <li class="feature-item"><i class="fas fa-times"></i> <span class="text-gray-400">Delivery</span></li>
+                    </ul>
+                </div>
+                <a href="#" class="btn-outline w-full justify-center text-xs lg:text-sm px-2 lg:px-6 py-2.5">Order now</a>
+            </div>
+
+            <!-- Plan 2 - Bundle (Popular) -->
+            <div class="pricing-card popular p-6 lg:p-8 text-center animate-fade-in-up flex flex-col justify-between h-full lg:scale-105" style="animation-delay: 0.1s;">
+                <div class="popular-badge">Most Popular</div>
+                <div>
+                    <div class="mb-6">
+                        <div class="w-16 h-16 bg-bakery/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-cake text-bakery text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Bundle</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Best value</p>
+                    </div>
+                    <div class="mb-6">
+                        <span class="text-4xl lg:text-5xl font-bold text-bakery price-tag">$24</span>
+                        <span class="text-gray-500 dark:text-gray-400 text-xs lg:text-sm">/ 6 items</span>
+                    </div>
+                    <ul class="text-left space-y-2 mb-8 text-xs lg:text-sm">
+                        <li class="feature-item"><i class="fas fa-check"></i> 6 pastries or breads</li>
+                        <li class="feature-item"><i class="fas fa-check"></i> Mix & match</li>
+                        <li class="feature-item"><i class="fas fa-check"></i> Priority custom orders</li>
+                        <li class="feature-item"><i class="fas fa-times"></i> <span class="text-gray-400">Delivery</span></li>
+                    </ul>
+                </div>
+                <a href="#" class="btn-primary w-full justify-center text-xs lg:text-sm px-2 lg:px-6 py-2.5">Get this bundle</a>
+            </div>
+
+            <!-- Plan 3 - Party -->
+            <div class="pricing-card p-6 lg:p-8 text-center animate-fade-in-up flex flex-col justify-between h-full" style="animation-delay: 0.15s;">
+                <div>
+                    <div class="mb-6">
+                        <div class="w-16 h-16 bg-bakery/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-crown text-bakery text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Party</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">For gatherings</p>
+                    </div>
+                    <div class="mb-6">
+                        <span class="text-4xl lg:text-5xl font-bold text-bakery price-tag">$48</span>
+                        <span class="text-gray-500 dark:text-gray-400 text-xs lg:text-sm">/ 12 items</span>
+                    </div>
+                    <ul class="text-left space-y-2 mb-8 text-xs lg:text-sm">
+                        <li class="feature-item"><i class="fas fa-check"></i> 12 pastries or breads</li>
+                        <li class="feature-item"><i class="fas fa-check"></i> Custom selection</li>
+                        <li class="feature-item"><i class="fas fa-check"></i> Priority custom orders</li>
+                        <li class="feature-item"><i class="fas fa-check"></i> <span class="text-bakery">Free local delivery</span></li>
+                    </ul>
+                </div>
+                <a href="#" class="btn-outline w-full justify-center text-xs lg:text-sm px-2 lg:px-6 py-2.5">Order party pack</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ====== PRICE TABLE / FULL MENU PRICING ====== -->
+<section class="py-24 bg-gradient-to-b from-[#FDF8F2] via-[#F8F1EA] to-[#FDF8F2] dark:from-[#1E1A17] dark:via-[#161210] dark:to-[#1E1A17] border-t border-bakery/20" id="full-menu">
+    <div class="w-full px-4 sm:px-8 md:px-12 lg:px-16">
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-bakery/15 border border-bakery/30 rounded-full text-bakery text-xs font-mono font-bold tracking-widest uppercase shadow-sm">
+                <i class="fas fa-utensils"></i> Complete Bakery Menu
+            </span>
+            <h2 class="text-4xl md:text-5xl font-display font-bold mt-4">Full Menu <span class="shimmer-text">Pricing</span></h2>
+            <p class="text-gray-600 dark:text-gray-300 mt-3 text-base max-w-xl mx-auto leading-relaxed">
+                Explore our complete selection of fresh artisan bakes. Compare single items, bundle savings, and party packs.
+            </p>
+        </div>
+
+        <!-- Filter & Search Control Bar -->
+        <div class="w-full mb-10 flex flex-col md:flex-row items-center justify-between gap-4 bg-white dark:bg-[#241E1A] p-4 rounded-3xl border-2 border-bakery/25 dark:border-bakery/35 shadow-lg backdrop-blur-md">
+            <!-- Category Filter Tabs -->
+            <div class="flex flex-wrap items-center justify-center gap-2 w-full md:w-auto" id="menu-filter-tabs">
+                <button data-filter="all" class="menu-tab-btn active px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 bg-bakery text-white shadow-md shadow-bakery/20">
+                    <i class="fas fa-border-all mr-1.5"></i> All Bakes
+                </button>
+                <button data-filter="breads" class="menu-tab-btn px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 bg-gray-100 dark:bg-[#1A1614] text-gray-700 dark:text-gray-300 hover:bg-bakery/15 hover:text-bakery border border-transparent hover:border-bakery/30">
+                    🍞 Breads
+                </button>
+                <button data-filter="pastries" class="menu-tab-btn px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 bg-gray-100 dark:bg-[#1A1614] text-gray-700 dark:text-gray-300 hover:bg-bakery/15 hover:text-bakery border border-transparent hover:border-bakery/30">
+                    🥐 Pastries
+                </button>
+                <button data-filter="cakes" class="menu-tab-btn px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 bg-gray-100 dark:bg-[#1A1614] text-gray-700 dark:text-gray-300 hover:bg-bakery/15 hover:text-bakery border border-transparent hover:border-bakery/30">
+                    🎂 Cakes
+                </button>
+            </div>
+
+            <!-- Search Input & View Toggle -->
+            <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+                <div class="relative flex-1 md:w-64">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-bakery">
+                        <i class="fas fa-search text-xs"></i>
+                    </span>
+                    <input type="text" id="menu-search-input" placeholder="Search menu..." class="w-full pl-9 pr-4 py-2 bg-cream/40 dark:bg-[#1A1614] border-2 border-bakery/20 rounded-full text-xs text-gray-800 dark:text-gray-200 focus:outline-none focus:border-bakery focus:ring-1 focus:ring-bakery transition-all">
+                </div>
+                
+                <!-- View Switcher -->
+                <div class="flex items-center bg-gray-100 dark:bg-[#1A1614] p-1 rounded-full border-2 border-bakery/20 shrink-0">
+                    <button id="view-grid-btn" class="w-9 h-9 rounded-full flex items-center justify-center text-xs bg-bakery text-white shadow-sm transition" title="Grid View">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+                    <button id="view-table-btn" class="w-9 h-9 rounded-full flex items-center justify-center text-xs text-gray-500 dark:text-gray-400 hover:text-bakery transition" title="Table View">
+                        <i class="fas fa-list-ul"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- GRID VIEW (Default) -->
+        <div id="menu-grid-container" class="w-full grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            
+            <!-- Item 1: Sourdough -->
+            <div class="menu-item-card bg-white dark:bg-[#241E1A] rounded-3xl overflow-hidden border-2 border-bakery/20 dark:border-bakery/30 shadow-md hover:shadow-2xl hover:border-bakery hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group" data-category="breads" data-name="classic sourdough">
+                <div>
+                    <div class="relative h-44 overflow-hidden">
+                        <img src="assets/h1.jpg" alt="Classic Sourdough" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-3 left-3">
+                            <span class="px-3 py-1 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md text-amber-700 dark:text-amber-300 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider border border-amber-300 dark:border-amber-700 shadow-sm">
+                                🌾 Organic
+                            </span>
+                        </div>
+                        <div class="absolute top-3 right-3">
+                            <span class="px-2.5 py-1 bg-bakery text-white rounded-full text-[10px] font-bold shadow-md flex items-center gap-1">
+                                <i class="fas fa-fire"></i> Bestseller
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-display font-bold text-gray-900 dark:text-white group-hover:text-bakery transition">Classic Sourdough</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">100% Organic Wheat, 48hr Wild Ferment</p>
+                    </div>
+                </div>
+
+                <div class="px-5 pb-5 pt-3 border-t border-bakery/15 bg-cream/30 dark:bg-[#1A1614]/50 space-y-2">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-gray-600 dark:text-gray-400">Single Loaf</span>
+                        <span class="font-bold text-gray-900 dark:text-white">$8.50</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs bg-bakery/10 dark:bg-bakery/20 p-2 rounded-xl border border-bakery/30">
+                        <span class="text-bakery font-bold flex items-center gap-1"><i class="fas fa-box"></i> Bundle (6)</span>
+                        <span class="font-bold text-bakery">$45.00 <span class="text-[9px] bg-bakery text-white px-1.5 py-0.5 rounded-full ml-1">-10%</span></span>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <!-- Item 2: Dark Rye -->
+            <div class="menu-item-card bg-white dark:bg-[#241E1A] rounded-3xl overflow-hidden border-2 border-bakery/20 dark:border-bakery/30 shadow-md hover:shadow-2xl hover:border-bakery hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group" data-category="breads" data-name="dark rye">
+                <div>
+                    <div class="relative h-44 overflow-hidden">
+                        <img src="assets/h2.jpg" alt="Dark Rye Loaf" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-3 left-3">
+                            <span class="px-3 py-1 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md text-amber-700 dark:text-amber-300 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider border border-amber-300 dark:border-amber-700 shadow-sm">
+                                🌾 Traditional
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-display font-bold text-gray-900 dark:text-white group-hover:text-bakery transition">Dark Rye Loaf</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Caraway seed crust & deep molasses flavor</p>
+                    </div>
+                </div>
+
+                <div class="px-5 pb-5 pt-3 border-t border-bakery/15 bg-cream/30 dark:bg-[#1A1614]/50 space-y-2">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-gray-600 dark:text-gray-400">Single Loaf</span>
+                        <span class="font-bold text-gray-900 dark:text-white">$7.80</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs bg-bakery/10 dark:bg-bakery/20 p-2 rounded-xl border border-bakery/30">
+                        <span class="text-bakery font-bold flex items-center gap-1"><i class="fas fa-box"></i> Bundle (6)</span>
+                        <span class="font-bold text-bakery">$42.00 <span class="text-[9px] bg-bakery text-white px-1.5 py-0.5 rounded-full ml-1">-10%</span></span>
+                    </div>
+                   
+                </div>
+            </div>
+
+            <!-- Item 3: Almond Croissant -->
+            <div class="menu-item-card bg-white dark:bg-[#241E1A] rounded-3xl overflow-hidden border-2 border-bakery/20 dark:border-bakery/30 shadow-md hover:shadow-2xl hover:border-bakery hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group" data-category="pastries" data-name="almond croissant">
+                <div>
+                    <div class="relative h-44 overflow-hidden">
+                        <img src="assets/almond-croissant.jpg" alt="Almond Croissant" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-3 left-3">
+                            <span class="px-3 py-1 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md text-amber-700 dark:text-amber-300 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider border border-amber-300 dark:border-amber-700 shadow-sm">
+                                🥐 French Pastry
+                            </span>
+                        </div>
+                        <div class="absolute top-3 right-3">
+                            <span class="px-2.5 py-1 bg-bakery text-white rounded-full text-[10px] font-bold shadow-md flex items-center gap-1">
+                                <i class="fas fa-fire"></i> Popular
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-display font-bold text-gray-900 dark:text-white group-hover:text-bakery transition">Almond Croissant</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Rich frangipane & toasted almond flakes</p>
+                    </div>
+                </div>
+
+                <div class="px-5 pb-5 pt-3 border-t border-bakery/15 bg-cream/30 dark:bg-[#1A1614]/50 space-y-2">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-gray-600 dark:text-gray-400">Single</span>
+                        <span class="font-bold text-gray-900 dark:text-white">$6.50</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs bg-bakery/10 dark:bg-bakery/20 p-2 rounded-xl border border-bakery/30">
+                        <span class="text-bakery font-bold flex items-center gap-1"><i class="fas fa-box"></i> Bundle (6)</span>
+                        <span class="font-bold text-bakery">$35.00 <span class="text-[9px] bg-bakery text-white px-1.5 py-0.5 rounded-full ml-1">-10%</span></span>
+                    </div>
+                  
+                </div>
+            </div>
+
+            <!-- Item 4: Pain au Chocolat -->
+            <div class="menu-item-card bg-white dark:bg-[#241E1A] rounded-3xl overflow-hidden border-2 border-bakery/20 dark:border-bakery/30 shadow-md hover:shadow-2xl hover:border-bakery hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group" data-category="pastries" data-name="pain au chocolat">
+                <div>
+                    <div class="relative h-44 overflow-hidden">
+                        <img src="assets/h4.jpg" alt="Pain au Chocolat" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-3 left-3">
+                            <span class="px-3 py-1 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md text-amber-900 dark:text-amber-200 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider border border-amber-300 dark:border-amber-700 shadow-sm">
+                                🍫 Valrhona Dark
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-display font-bold text-gray-900 dark:text-white group-hover:text-bakery transition">Pain au Chocolat</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Double Valrhona dark chocolate batons</p>
+                    </div>
+                </div>
+
+                <div class="px-5 pb-5 pt-3 border-t border-bakery/15 bg-cream/30 dark:bg-[#1A1614]/50 space-y-2">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-gray-600 dark:text-gray-400">Single</span>
+                        <span class="font-bold text-gray-900 dark:text-white">$7.20</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs bg-bakery/10 dark:bg-bakery/20 p-2 rounded-xl border border-bakery/30">
+                        <span class="text-bakery font-bold flex items-center gap-1"><i class="fas fa-box"></i> Bundle (6)</span>
+                        <span class="font-bold text-bakery">$38.00 <span class="text-[9px] bg-bakery text-white px-1.5 py-0.5 rounded-full ml-1">-10%</span></span>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <!-- Item 5: Red Velvet Cake -->
+            <div class="menu-item-card bg-white dark:bg-[#241E1A] rounded-3xl overflow-hidden border-2 border-bakery/20 dark:border-bakery/30 shadow-md hover:shadow-2xl hover:border-bakery hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group" data-category="cakes" data-name="red velvet cake">
+                <div>
+                    <div class="relative h-44 overflow-hidden">
+                        <img src="assets/cake1.jpg" alt="Red Velvet Cake" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-3 left-3">
+                            <span class="px-3 py-1 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md text-rose-700 dark:text-rose-300 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider border border-rose-300 dark:border-rose-700 shadow-sm">
+                                🎂 8" Whole Cake
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-display font-bold text-gray-900 dark:text-white group-hover:text-bakery transition">Red Velvet Layer Cake</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Rich cream cheese frosting & cocoa crumble</p>
+                    </div>
+                </div>
+
+                <div class="px-5 pb-5 pt-3 border-t border-bakery/15 bg-cream/30 dark:bg-[#1A1614]/50 space-y-2">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-gray-600 dark:text-gray-400">Single Whole Cake</span>
+                        <span class="font-bold text-gray-900 dark:text-white">$42.00</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs bg-bakery/10 dark:bg-bakery/20 p-2 rounded-xl border border-bakery/30">
+                        <span class="text-bakery font-bold flex items-center gap-1"><i class="fas fa-layer-group"></i> Catering (3)</span>
+                        <span class="font-bold text-bakery">$115.00 <span class="text-[9px] bg-bakery text-white px-1.5 py-0.5 rounded-full ml-1">Save $11</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 6: Caramel Crunch Cake -->
+            <div class="menu-item-card bg-white dark:bg-[#241E1A] rounded-3xl overflow-hidden border-2 border-bakery/20 dark:border-bakery/30 shadow-md hover:shadow-2xl hover:border-bakery hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group" data-category="cakes" data-name="caramel crunch cake">
+                <div>
+                    <div class="relative h-44 overflow-hidden">
+                        <img src="assets/caramel-crunch.jpg" alt="Caramel Crunch Cake" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute top-3 left-3">
+                            <span class="px-3 py-1 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md text-amber-700 dark:text-amber-300 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider border border-amber-300 dark:border-amber-700 shadow-sm">
+                                👑 Signature
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-display font-bold text-gray-900 dark:text-white group-hover:text-bakery transition">Caramel Crunch Cake</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Salted caramel buttercream & hazelnut praline</p>
+                    </div>
+                </div>
+
+                <div class="px-5 pb-5 pt-3 border-t border-bakery/15 bg-cream/30 dark:bg-[#1A1614]/50 space-y-2">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-gray-600 dark:text-gray-400">Single Whole Cake</span>
+                        <span class="font-bold text-gray-900 dark:text-white">$48.00</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs bg-bakery/10 dark:bg-bakery/20 p-2 rounded-xl border border-bakery/30">
+                        <span class="text-bakery font-bold flex items-center gap-1"><i class="fas fa-layer-group"></i> Catering (3)</span>
+                        <span class="font-bold text-bakery">$130.00 <span class="text-[9px] bg-bakery text-white px-1.5 py-0.5 rounded-full ml-1">Save $14</span></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- TABLE VIEW (Hidden by Default) -->
+        <div id="menu-table-container" class="w-full hidden bg-white dark:bg-[#241E1A] rounded-3xl p-6 border-2 border-bakery/30 dark:border-bakery/40 shadow-xl">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs border-collapse border-2 border-bakery/30 dark:border-bakery/40 rounded-2xl overflow-hidden bg-white dark:bg-[#161210]">
+                    <thead>
+                        <tr class="bg-bakery/15 dark:bg-bakery/25 text-bakery dark:text-bakery-light font-display font-bold uppercase tracking-wider text-xs border-b-2 border-bakery/30">
+                            <th class="py-3.5 px-4 border-r border-bakery/25"><i class="fas fa-bread-slice mr-1.5"></i>Item Name</th>
+                            <th class="py-3.5 px-4 border-r border-bakery/25"><i class="fas fa-tag mr-1.5"></i>Category</th>
+                            <th class="py-3.5 px-4 border-r border-bakery/25"><i class="fas fa-cookie mr-1.5"></i>Single</th>
+                            <th class="py-3.5 px-4 border-r border-bakery/25"><i class="fas fa-box mr-1.5"></i>Bundle (6)</th>
+                            <th class="py-3.5 px-4"><i class="fas fa-users mr-1.5"></i>Party (12)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-bakery/20 dark:divide-bakery/30" id="table-body-rows">
+                        <!-- Populated by JS dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Savings Notice Banner -->
+        <div class="w-full mt-8 p-4 rounded-2xl bg-bakery/10 border border-bakery/20 flex items-center justify-between flex-col sm:flex-row gap-3 text-xs text-gray-700 dark:text-gray-300">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-percentage text-bakery text-base"></i>
+                <span><strong>Bundle Savings:</strong> Enjoy 10% instant discount on all 6-item bundles & free delivery on party packs.</span>
+            </div>
+            <a href="custom-orders.html" class="text-bakery font-bold hover:underline whitespace-nowrap">
+                Need custom catering? →
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ====== CUSTOM ORDERS CTA ====== -->
+<section class="py-20 bg-white dark:bg-[#161210] border-t border-bakery/10">
+    <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto bg-gradient-to-r from-cream to-[#F5E6D6] dark:from-[#241E1A] dark:to-[#1E1A17] rounded-3xl p-10 md:p-14 border border-bakery/20 shadow-xl relative overflow-hidden">
+            <div class="absolute -top-16 -right-16 w-48 h-48 bg-bakery/15 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="absolute -bottom-16 -left-16 w-48 h-48 bg-bakery/15 rounded-full blur-2xl pointer-events-none"></div>
+            
+            <div class="relative z-10 text-center">
+                <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-bakery/10 border border-bakery/20 rounded-full text-bakery text-xs font-mono font-bold tracking-widest uppercase mb-4">
+                    <i class="fas fa-pencil-alt"></i> Custom Orders
+                </span>
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-900 dark:text-white">Need something <span class="text-bakery">special?</span></h2>
+                <p class="text-gray-600 dark:text-gray-300 mt-3 text-base max-w-xl mx-auto leading-relaxed">
+                    Custom cakes, catering trays, and special requests — we'll create something unforgettable for your event.
+                </p>
+                <div class="flex flex-wrap items-center justify-center gap-4 mt-8">
+                    <a href="custom-orders.html" class="btn-primary px-7 py-3 text-sm shadow-md hover:shadow-lg">
+                        <i class="fas fa-pencil-alt"></i> Start your custom order
+                    </a>
+                    <a href="contact.html" class="btn-outline px-7 py-3 text-sm">
+                        <i class="fas fa-comment"></i> Talk to a baker
+                    </a>
+                </div>
+                <p class="mt-4 text-sm text-gray-500 dark:text-gray-400">
+                    <i class="fas fa-phone text-bakery mr-1"></i> Call us at +1 (323) 555-0271 for urgent orders
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====== FOOTER (exactly as reference) ====== -->
+<footer id="contact" class="pt-16 pb-8 bg-gray-900 dark:bg-[#0A0A0A]">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <div class="text-center md:text-start">
+                <div class="flex items-center gap-3 mb-6 justify-center md:justify-start">
+                    <div class="bg-bakery/10 px-5 py-2 rounded-full border border-bakery/30 flex items-center gap-3">
+                        <div class="w-7 h-7 rounded-full bg-bakery/20 flex items-center justify-center text-bakery text-xs shrink-0">
+                            <i class="fas fa-bread-slice"></i>
+                        </div>
+                        <span class="text-base font-display font-bold text-white tracking-tight whitespace-nowrap">The Daily <span class="text-bakery">Dough</span></span>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-[16px] leading-relaxed mb-6">Artisan bakery & cake shop — made from scratch, with love.</p>
+                <div class="flex gap-3 justify-center md:justify-start">
+                    <a href="#" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" title="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="text-center md:text-start"><h3 class="text-white text-xl font-display font-bold mb-5 footer-heading">Explore</h3><ul class="space-y-2 text-gray-400"><li><a href="signature-cakes.html" class="hover:text-bakery transition block">Cakes</a></li><li><a href="fresh-pastries.html" class="hover:text-bakery transition block">Pastries</a></li><li><a href="artisan-breads.html" class="hover:text-bakery transition block">Breads</a></li><li><a href="#" class="hover:text-bakery transition block">Seasonal</a></li></ul></div>
+            <div class="text-center md:text-start"><h3 class="text-white text-xl font-display font-bold mb-5 footer-heading">Services</h3><ul class="space-y-2 text-gray-400"><li><a href="custom-orders.html" class="hover:text-bakery transition block">Custom Cakes</a></li><li><a href="#" class="hover:text-bakery transition block">Catering</a></li><li><a href="#" class="hover:text-bakery transition block">Corporate</a></li><li><a href="#" class="hover:text-bakery transition block">Gift boxes</a></li></ul></div>
+            <div class="text-center md:text-start"><h3 class="text-white text-xl font-display font-bold mb-5 footer-heading">Bakery</h3><ul class="space-y-3 text-gray-400"><li class="footer-contact-item justify-center md:justify-start"><i class="fas fa-map-marker-alt"></i><span>88 Baker Street, LA</span></li><li class="footer-contact-item justify-center md:justify-start"><i class="fas fa-phone"></i><span>+1 (323) 555-0271</span></li><li class="footer-contact-item justify-center md:justify-start"><i class="fas fa-envelope"></i><span>hello@thedailydough.com</span></li></ul></div>
+        </div>
+        <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-xs font-mono"><p>© 2026 The Daily Dough — baked fresh daily. #TasteTheTradition</p></div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Theme Toggle
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeBtnMob = document.getElementById('theme-toggle-mobile');
+        const updateThemeUI = (isDark) => { [themeBtn, themeBtnMob].forEach(b => { if (b) { const moon = b.querySelector('.fa-moon'); const sun = b.querySelector('.fa-sun'); if (moon && sun) { if (isDark) { moon.classList.add('hidden'); sun.classList.remove('hidden'); } else { moon.classList.remove('hidden'); sun.classList.add('hidden'); } } } }); };
+        const toggleTheme = () => { document.documentElement.classList.toggle('dark'); const isDark = document.documentElement.classList.contains('dark'); localStorage.setItem('theme', isDark ? 'dark' : 'light'); updateThemeUI(isDark); };
+        if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+        if (themeBtnMob) themeBtnMob.addEventListener('click', toggleTheme);
+        if (localStorage.getItem('theme') === 'dark') { document.documentElement.classList.add('dark'); updateThemeUI(true); }
+
+        // RTL Toggle
+        const rtlBtn = document.getElementById('rtl-toggle');
+        const rtlMob = document.getElementById('rtl-toggle-mobile');
+        const updateRtlUI = (isRtl) => { const dir = isRtl ? 'rtl' : 'ltr'; document.documentElement.dir = dir; document.body.dir = dir; [rtlBtn, rtlMob].forEach(b => b && b.classList.toggle('active', isRtl)); };
+        const toggleRtl = () => { const isRtl = document.documentElement.dir !== 'rtl'; localStorage.setItem('dir', isRtl ? 'rtl' : 'ltr'); updateRtlUI(isRtl); };
+        if (rtlBtn) rtlBtn.addEventListener('click', toggleRtl);
+        if (rtlMob) rtlMob.addEventListener('click', toggleRtl);
+        if (localStorage.getItem('dir') === 'rtl') updateRtlUI(true);
+
+        // Mobile Menu
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const icon = mobileToggle?.querySelector('i');
+        if (mobileToggle) { mobileToggle.addEventListener('click', () => { mobileMenu.classList.toggle('open'); icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-times'); document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : ''; }); }
+        document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => { btn.addEventListener('click', () => { const content = btn.nextElementSibling; content.classList.toggle('show'); const chevron = btn.querySelector('.fa-chevron-down'); if (chevron) chevron.style.transform = content.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0)'; }); });
+        document.querySelectorAll('.dropdown').forEach(dropdown => { const btn = dropdown.querySelector('button'); if (btn) { btn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); document.querySelectorAll('.dropdown').forEach(d => { if (d !== dropdown) d.classList.remove('open'); }); dropdown.classList.toggle('open'); }); } });
+        document.addEventListener('click', (e) => { if (!e.target.closest('.dropdown')) { document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open')); } });
+
+        // ===== FULL MENU PRICING INTERACTIVE LOGIC =====
+        const tabBtns = document.querySelectorAll('.menu-tab-btn');
+        const searchInput = document.getElementById('menu-search-input');
+        const gridContainer = document.getElementById('menu-grid-container');
+        const tableContainer = document.getElementById('menu-table-container');
+        const tableBody = document.getElementById('table-body-rows');
+        const viewGridBtn = document.getElementById('view-grid-btn');
+        const viewTableBtn = document.getElementById('view-table-btn');
+        const itemCards = document.querySelectorAll('.menu-item-card');
+
+        let currentFilter = 'all';
+        let currentQuery = '';
+
+        // Menu items data for table rendering
+        const menuData = [
+            { name: 'Classic Sourdough', category: 'breads', catLabel: 'Breads', single: '$8.50', bundle: '$45.00', party: '$84.00' },
+            { name: 'Dark Rye Loaf', category: 'breads', catLabel: 'Breads', single: '$7.80', bundle: '$42.00', party: '$78.00' },
+            { name: 'Almond Croissant', category: 'pastries', catLabel: 'Pastries', single: '$6.50', bundle: '$35.00', party: '$64.00' },
+            { name: 'Pain au Chocolat', category: 'pastries', catLabel: 'Pastries', single: '$7.20', bundle: '$38.00', party: '$70.00' },
+            { name: 'Red Velvet Layer Cake', category: 'cakes', catLabel: 'Cakes', single: '$42.00', bundle: '$115.00 (3 Cakes)', party: 'Custom' },
+            { name: 'Caramel Crunch Cake', category: 'cakes', catLabel: 'Cakes', single: '$48.00', bundle: '$130.00 (3 Cakes)', party: 'Custom' }
+        ];
+
+        // Filter Function
+        const filterItems = () => {
+            itemCards.forEach(card => {
+                const cat = card.getAttribute('data-category');
+                const name = card.getAttribute('data-name').toLowerCase();
+                const matchesCat = (currentFilter === 'all' || cat === currentFilter);
+                const matchesQuery = (!currentQuery || name.includes(currentQuery.toLowerCase()));
+
+                if (matchesCat && matchesQuery) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            renderTable();
+        };
+
+        // Table Render
+        const renderTable = () => {
+            if (!tableBody) return;
+            const filtered = menuData.filter(item => {
+                const matchesCat = (currentFilter === 'all' || item.category === currentFilter);
+                const matchesQuery = (!currentQuery || item.name.toLowerCase().includes(currentQuery.toLowerCase()));
+                return matchesCat && matchesQuery;
+            });
+
+            if (filtered.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="5" class="py-8 text-center text-gray-400">No bakes found matching your filter.</td></tr>`;
+                return;
+            }
+
+            tableBody.innerHTML = filtered.map(item => `
+                <tr class="hover:bg-bakery/10 transition border-b border-bakery/20">
+                    <td class="py-3.5 px-4 font-bold text-gray-900 dark:text-white border-r border-bakery/20">${item.name}</td>
+                    <td class="py-3.5 px-4 text-gray-500 dark:text-gray-400 border-r border-bakery/20"><span class="px-2.5 py-1 rounded-full bg-bakery/10 border border-bakery/20 text-bakery text-[10px] font-mono font-bold">${item.catLabel}</span></td>
+                    <td class="py-3.5 px-4 font-semibold text-gray-800 dark:text-gray-200 border-r border-bakery/20">${item.single}</td>
+                    <td class="py-3.5 px-4 font-bold text-bakery border-r border-bakery/20 bg-bakery/5 dark:bg-bakery/10">${item.bundle}</td>
+                    <td class="py-3.5 px-4 font-medium text-gray-600 dark:text-gray-400">${item.party}</td>
+                </tr>
+            `).join('');
+        };
+
+        // Tab Clicks
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => {
+                    b.classList.remove('bg-bakery', 'text-white', 'shadow-md');
+                    b.classList.add('bg-gray-100', 'dark:bg-[#1E1A17]', 'text-gray-700', 'dark:text-gray-300');
+                });
+                btn.classList.remove('bg-gray-100', 'dark:bg-[#1E1A17]', 'text-gray-700', 'dark:text-gray-300');
+                btn.classList.add('bg-bakery', 'text-white', 'shadow-md');
+
+                currentFilter = btn.getAttribute('data-filter');
+                filterItems();
+            });
+        });
+
+        // Search Input
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                currentQuery = e.target.value;
+                filterItems();
+            });
+        }
+
+        // View Switcher
+        if (viewGridBtn && viewTableBtn) {
+            viewGridBtn.addEventListener('click', () => {
+                gridContainer.classList.remove('hidden');
+                tableContainer.classList.add('hidden');
+                viewGridBtn.classList.add('bg-bakery', 'text-white');
+                viewGridBtn.classList.remove('text-gray-500', 'dark:text-gray-400');
+                viewTableBtn.classList.remove('bg-bakery', 'text-white');
+                viewTableBtn.classList.add('text-gray-500', 'dark:text-gray-400');
+            });
+            viewTableBtn.addEventListener('click', () => {
+                gridContainer.classList.add('hidden');
+                tableContainer.classList.remove('hidden');
+                viewTableBtn.classList.add('bg-bakery', 'text-white');
+                viewTableBtn.classList.remove('text-gray-500', 'dark:text-gray-400');
+                viewGridBtn.classList.remove('bg-bakery', 'text-white');
+                viewGridBtn.classList.add('text-gray-500', 'dark:text-gray-400');
+                renderTable();
+            });
+        }
+
+        // Initial table render
+        renderTable();
+    });
+</script>
+</body>
+</html>

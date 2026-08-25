@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Dough · Local Artisan Bakery & Cake Shop</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='78' font-size='78' text-anchor='middle'%3E🧁%3C/text%3E%3C/svg%3E">
+    <meta name="description" content="Freshly baked cakes, daily specials & artisan pastries in the heart of the city.">
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'bakery': '#D97A4A',         // warm crust
+                        'bakery-dark': '#B45F3A',
+                        'bakery-light': '#F0C9A0',
+                        'bakery-glow': '#F7D9B0',
+                        'cream': '#FEF7F0',
+                        'canvas-light': '#FDF8F2',
+                        'canvas-dark': '#1E1A17',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Syne', 'sans-serif'],
+                        'mono': ['Space Mono', 'monospace'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'shimmer': 'shimmer 3s linear infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'marquee': 'marquee 20s linear infinite',
+                        'scale-up': 'scaleUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        float: { '0%, 100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-15px)' } },
+                        shimmer: { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+                        marquee: { '0%': { transform: 'translateX(0%)' }, '100%': { transform: 'translateX(-50%)' } },
+                        scaleUp: { '0%': { transform: 'scale(0.95)', opacity: '0' }, '100%': { transform: 'scale(1)', opacity: '1' } }
+                    },
+                }
+            }
+        }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; scrollbar-width: none; -ms-overflow-style: none; }
+        body::-webkit-scrollbar { display: none; }
+
+        /* navigation (identical LTR & RTL compatibility) */
+        .nav-item { position: relative; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.02em; transition: color 0.3s; padding: 0.5rem 0; }
+        .nav-item:hover, .nav-item.active { color: #D97A4A; }
+        .nav-item.active { font-weight: 700; }
+        .nav-item::after { content: ''; position: absolute; bottom: 0; inset-inline-start: 0; width: 0; height: 2px; background: #D97A4A; transition: width 0.3s; }
+        .nav-item:hover::after { width: 100%; }
+        .dropdown { position: relative; }
+        .dropdown-menu { position: absolute; top: 100%; inset-inline-start: 0; min-width: 200px; background: #FFFFFF; border-radius: 16px; padding: 0.5rem 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; z-index: 1000; border: 1px solid #D97A4A30; box-shadow: 0 15px 35px rgba(0,0,0,0.08); text-align: start; }
+        .dropdown-menu.dropdown-right { inset-inline-start: auto; inset-inline-end: 0; }
+        .dark .dropdown-menu { background: #1E1A17; border-color: #D97A4A40; }
+        .dropdown:hover .dropdown-menu, .dropdown.open .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-item { display: flex; align-items: center; padding: 0.6rem 1.2rem; gap: 10px; transition: all 0.2s; font-size: 0.85rem; }
+        .dropdown-item:hover { background: #D97A4A10; color: #D97A4A; padding-inline-start: 1.5rem; }
+        .dropdown-item.active { background: #D97A4A08; color: #D97A4A; font-weight: 700; border-inline-start: 3px solid #D97A4A; padding-inline-start: 1.5rem; }
+        .dropdown-item i { width: 18px; color: #D97A4A; }
+
+        .auth-btn { padding: 0.5rem 1.5rem; border-radius: 40px; font-weight: 500; font-size: 0.85rem; transition: all 0.3s; }
+        .auth-btn.login { background: transparent; border: 1.5px solid #D97A4A; color: #D97A4A; }
+        .auth-btn.login:hover { background: #D97A4A; color: white; }
+        .auth-btn.signup { background: #D97A4A; color: white; }
+        .auth-btn.signup:hover { background: #B45F3A; transform: translateY(-2px); }
+
+        .toggle-btn { width: 36px; height: 36px; border-radius: 40px; background: #F0EDE8; color: #D97A4A; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+        .dark .toggle-btn { background: #2A2520; color: #FFFFFF; }
+        .toggle-btn:hover, .toggle-btn.active { background: #D97A4A; color: white; transform: rotate(10deg); }
+
+        /* bakery cards */
+        .feature-card { background: #FFFFFF; border-radius: 28px; transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1); overflow: hidden; box-shadow: 0 12px 28px -8px rgba(0,0,0,0.06); }
+        .dark .feature-card { background: #1E1A17; box-shadow: 0 12px 28px -8px rgba(0,0,0,0.6); }
+        .feature-card:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 30px 40px -12px #D97A4A50; }
+
+        .btn-primary { background: #D97A4A; color: white; padding: 0.8rem 2rem; border-radius: 60px; font-weight: 600; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-primary:hover { background: #B45F3A; transform: scale(1.03); }
+        .btn-outline { border: 2px solid #D97A4A; background: transparent; color: #D97A4A; padding: 0.75rem 2rem; border-radius: 60px; font-weight: 600; transition: all 0.3s; }
+        .btn-outline:hover { background: #D97A4A; color: white; }
+
+        .social-icon { width: 40px; height: 40px; background: #2A2520; display: inline-flex; align-items: center; justify-content: center; border-radius: 60px; transition: all 0.3s; color: #D97A4A; }
+        .social-icon:hover { background: #D97A4A; color: white; transform: translateY(-3px); }
+
+        .mobile-menu { background: #FFFFFF; max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+        .dark .mobile-menu { background: #1E1A17; }
+        .mobile-menu.open { max-height: 80vh; overflow-y: auto; }
+        .mobile-menu-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #E8E4DF; font-weight: 500; transition: all 0.3s; text-align: start; }
+        .dark .mobile-menu-item { border-bottom-color: #2A2520; }
+        .mobile-menu-item.active, .mobile-dropdown-content a.active { border-inline-start: 4px solid #D97A4A; border-left: none; background: #D97A4A08; color: #D97A4A; font-weight: 700; }
+        .mobile-dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.3s; background: #F8F4EF; text-align: start; }
+        .dark .mobile-dropdown-content { background: #1E1A17; }
+        .mobile-dropdown-content.show { max-height: 180px; }
+
+        [dir="rtl"] .fa-arrow-right, [dir="rtl"] .fa-chevron-right { transform: scaleX(-1); }
+        [dir="rtl"] .fa-arrow-left, [dir="rtl"] .fa-chevron-left { transform: scaleX(-1); }
+
+
+        .footer-heading { position: relative; padding-bottom: 0.5rem; display: inline-block; }
+        @media (min-width: 768px) { .footer-heading { display: block; padding-bottom: 0; border-inline-start: 3px solid #D97A4A; padding-inline-start: 0.75rem; } }
+        .footer-contact-item { display: flex; gap: 0.75rem; align-items: center; }
+        .footer-contact-item i { width: 20px; color: #D97A4A; }
+        .marquee-wrapper { overflow: hidden; white-space: nowrap; display: flex; }
+        .marquee-content { display: inline-flex; animation: marquee 22s linear infinite; gap: 3rem; }
+
+        .stats-card { background: rgba(217, 122, 74, 0.08); backdrop-filter: blur(8px); border-radius: 2rem; }
+        .dark .stats-card { background: rgba(217, 122, 74, 0.15); }
+        .shimmer-text { background: linear-gradient(120deg, #D97A4A, #F0C9A0, #D97A4A, #B45F3A); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 3s linear infinite; }
+    </style>
+</head>
+<body class="bg-canvas-light dark:bg-canvas-dark text-gray-900 dark:text-gray-100">
+
+<!-- ========== HEADER (identical structure, bakery colors) ========== -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-canvas-dark/95 backdrop-blur-md border-b border-bakery/30">
+    <div class="container mx-auto px-6">
+        <div class="flex items-center justify-between h-20 relative">
+            <a href="index.html" class="flex items-center group">
+                <div class="bg-white dark:bg-[#1E1A17] px-5 py-2 rounded-full flex items-center shadow-sm border border-bakery/25 group-hover:border-bakery transition-all duration-300 gap-3">
+                    <div class="w-7 h-7 rounded-full bg-bakery/15 dark:bg-bakery/25 flex items-center justify-center text-bakery dark:text-bakery-light text-xs shrink-0">
+                        <i class="fas fa-bread-slice"></i>
+                    </div>
+                    <span class="text-base font-sans font-bold text-gray-900 dark:text-white tracking-tight whitespace-nowrap" style="font-family: 'Inter', system-ui, sans-serif !important;">The Daily <span class="text-bakery">Dough</span></span>
+                </div>
+            </a>
+
+            <!-- desktop nav -->
+            <div class="hidden xl:flex items-center justify-center absolute left-1/2 -translate-x-1/2">
+                <div class="flex items-center gap-7">
+                    <div class="dropdown">
+                        <button class="nav-item active flex items-center gap-1">Home <i class="fas fa-chevron-down text-[10px]"></i></button>
+                        <div class="dropdown-menu">
+                            <a href="index.html" class="dropdown-item active">Home 1</a>
+                            <a href="home2.html" class="dropdown-item">Home 2</a>
+                        </div>
+                    </div>
+                    <a href="about.html" class="nav-item">About</a>
+                    <div class="dropdown">
+                        <button class="nav-item flex items-center gap-1">Products <i class="fas fa-chevron-down text-[10px]"></i></button>
+                        <div class="dropdown-menu">
+                            <a href="signature-cakes.html" class="dropdown-item">Signature Cakes</a>
+                            <a href="fresh-pastries.html" class="dropdown-item">Fresh Pastries</a>
+                            <a href="artisan-breads.html" class="dropdown-item">Artisan Breads</a>
+                        </div>
+                    </div>
+                    <a href="pricing.html" class="nav-item">Pricing</a>
+                    <a href="custom-orders.html" class="nav-item">Custom Orders</a>
+                    <a href="contact.html" class="nav-item">Contact</a>
+                </div>
+            </div>
+
+            <div class="hidden xl:flex items-center gap-3 ms-auto me-4">
+                <button id="theme-toggle" class="toggle-btn" title="Toggle theme"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+                <button id="rtl-toggle" class="toggle-btn" title="Toggle RTL">⇄</button>
+                
+                <!-- Authentication Logo & Dropdown -->
+                <div class="dropdown">
+                    <button class="toggle-btn flex items-center justify-center text-lg" title="Account authentication">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-right !min-w-[170px] shadow-xl">
+                        <a href="login.html" class="dropdown-item">Login</a>
+                        <a href="signup.html" class="dropdown-item">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+            <button id="mobile-toggle" class="xl:hidden text-gray-800 dark:text-white p-2 text-2xl"><i class="fas fa-bars"></i></button>
+        </div>
+
+        <!-- mobile menu -->
+        <div id="mobile-menu" class="mobile-menu xl:hidden">
+            <div class="mobile-dropdown">
+                <button class="mobile-dropdown-btn flex justify-between items-center w-full mobile-menu-item active">Home <i class="fas fa-chevron-down text-xs"></i></button>
+                <div class="mobile-dropdown-content">
+                    <a href="index.html" class="block px-8 py-2 text-sm active">Home 1</a>
+                    <a href="home2.html" class="block px-8 py-2 text-sm">Home 2</a>
+                </div>
+            </div>
+            <a href="about.html" class="mobile-menu-item">About</a>
+            <div class="mobile-dropdown">
+                <button class="mobile-dropdown-btn flex justify-between items-center w-full mobile-menu-item">Products <i class="fas fa-chevron-down text-xs"></i></button>
+                <div class="mobile-dropdown-content">
+                    <a href="signature-cakes.html" class="block px-8 py-2 text-sm">Signature Cakes</a>
+                    <a href="fresh-pastries.html" class="block px-8 py-2 text-sm">Fresh Pastries</a>
+                    <a href="artisan-breads.html" class="block px-8 py-2 text-sm">Artisan Breads</a>
+                </div>
+            </div>
+            <a href="pricing.html" class="mobile-menu-item">Pricing</a>
+            <a href="custom-orders.html" class="mobile-menu-item">Custom Orders</a>
+            <a href="contact.html" class="mobile-menu-item">Contact</a>
+            <div class="p-4 px-6 border-t border-bakery/20 space-y-3">
+                <div class="flex items-center gap-3">
+                    <a href="login.html" class="auth-btn login flex-1 text-center py-2 text-xs font-semibold">Login</a>
+                    <a href="signup.html" class="auth-btn signup flex-1 text-center py-2 text-xs font-semibold">Sign Up</a>
+                </div>
+                <div class="flex items-center justify-center gap-3 pt-1">
+                    <button id="theme-toggle-mobile" class="toggle-btn" title="Toggle theme"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+                    <button id="rtl-toggle-mobile" class="toggle-btn" title="Toggle RTL">⇄</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ========== 1. HERO: WELCOME + DAILY SPECIAL ========== -->
+<section id="home" class="relative min-h-screen pt-24 pb-0 flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-[#FAF2E8] to-[#F5E6D6] dark:from-[#1E1A17] dark:via-[#181412] dark:to-[#14110F]">
+    <div class="absolute inset-0 bg-gradient-to-br from-bakery/5 via-transparent to-bakery/10 pointer-events-none"></div>
+    <div class="container mx-auto px-6 relative z-10 flex-1 flex items-center py-4 md:py-8">
+        <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
+            <div class="order-1 lg:order-1">
+                <div class="inline-block mb-3"><span class="px-4 py-1.5 bg-bakery/10 border border-bakery/20 rounded-full text-bakery font-mono text-xs tracking-wider uppercase font-bold inline-block">🍰 TODAY'S SPECIAL</span></div>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.1] tracking-tight">Fresh from <span class="shimmer-text">the oven</span></h1>
+                <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 mt-4 max-w-lg leading-relaxed">Buttery croissants, signature layer cakes & daily artisan breads — baked with love since 1989.</p>
+                <div class="flex flex-wrap gap-4 mt-6">
+                    <a href="products.html" class="btn-primary"><i class="fas fa-cake"></i> See today's specials</a>
+                    <a href="contact.html" class="btn-outline"><i class="fas fa-utensils"></i> Order online</a>
+                </div>
+                <div class="flex items-center gap-6 mt-6 pt-2">
+                    <div><span class="font-bold text-xl md:text-2xl text-bakery">24+</span><p class="text-xs text-gray-500">Fresh bakes daily</p></div>
+                    <div class="w-px h-8 bg-bakery/30"></div>
+                    <div><span class="font-bold text-xl md:text-2xl text-bakery">7</span><p class="text-xs text-gray-500">Signature cakes</p></div>
+                    <div class="w-px h-8 bg-bakery/30"></div>
+                    <div><span class="font-bold text-xl md:text-2xl text-bakery">★</span><p class="text-xs text-gray-500">4.9 rating</p></div>
+                </div>
+            </div>
+            <div class="relative order-2 lg:order-2 flex justify-center lg:justify-end">
+                <div class="relative w-full max-w-[460px] lg:max-w-[480px] max-h-[380px] lg:max-h-[420px] rounded-[2.5rem] overflow-hidden shadow-2xl skew-y-1 hover:skew-y-0 transition-transform duration-700">
+                    <img src="assets/cake.jpg" alt="Fresh cake" class="w-full h-full object-cover rounded-[2.5rem]">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-transparent"></div>
+                </div>
+                <div class="absolute -bottom-6 -left-6 w-40 h-40 bg-bakery/20 rounded-full blur-3xl -z-10"></div>
+            </div>
+        </div>
+    </div>
+    <!-- marquee -->
+    <div class="marquee-wrapper py-3.5 bg-bakery/90 dark:bg-bakery-dark overflow-hidden shadow-xl w-full mt-auto">
+        <div class="marquee-content text-white font-display font-bold text-base md:text-lg uppercase tracking-widest py-1">
+            <span>✦ TODAY'S BAKE: HONEY OAT LOAF</span>
+            <span>⚡ SIGNATURE RED VELVET</span>
+            <span>🎂 ORDER 2H PICKUP</span>
+            <span>🥐 FRESH CROISSANTS</span>
+            <span>✦ TODAY'S BAKE: HONEY OAT LOAF</span>
+            <span>⚡ SIGNATURE RED VELVET</span>
+            <span>🎂 ORDER 2H PICKUP</span>
+            <span>🥐 FRESH CROISSANTS</span>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<!-- ===== SECTION 2: BESTSELLING CAKES ===== -->
+<section id="products" class="py-24 bg-white dark:bg-[#161210] border-t border-bakery/15">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-14">
+            <span class="px-4 py-1.5 bg-bakery/10 border border-bakery/20 rounded-full text-bakery font-mono text-xs tracking-wider uppercase font-bold inline-block">⭐ BESTSELLERS</span>
+            <h2 class="text-4xl md:text-5xl font-display font-bold mt-4">Our most <span class="text-bakery">loved cakes</span></h2>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="feature-card p-6 rounded-3xl border border-bakery/20 dark:border-bakery/30 bg-white dark:bg-[#1E1A17] shadow-sm hover:shadow-xl hover:border-bakery hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                <div>
+                    <div class="w-full h-52 overflow-hidden rounded-2xl mb-5">
+                        <img src="assets/cake1.jpg" alt="Red Velvet Dream" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-1 text-gray-900 dark:text-white group-hover:text-bakery transition">Red Velvet Dream</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Cream cheese frosting, velvety crumb</p>
+                </div>
+                <div>
+                    <span class="inline-block mt-4 text-bakery font-bold text-2xl">$42</span>
+                    <button class="mt-4 w-full py-2.5 border border-bakery/40 rounded-full text-sm font-medium hover:bg-bakery hover:text-white transition">Order now</button>
+                </div>
+            </div>
+            <div class="feature-card p-6 rounded-3xl border border-bakery/20 dark:border-bakery/30 bg-white dark:bg-[#1E1A17] shadow-sm hover:shadow-xl hover:border-bakery hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                <div>
+                    <div class="w-full h-52 overflow-hidden rounded-2xl mb-5">
+                        <img src="assets/cake4.jpg" alt="Caramel Crunch" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-1 text-gray-900 dark:text-white group-hover:text-bakery transition">Caramel Crunch</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Salted caramel, chocolate ganache</p>
+                </div>
+                <div>
+                    <span class="inline-block mt-4 text-bakery font-bold text-2xl">$48</span>
+                    <button class="mt-4 w-full py-2.5 border border-bakery/40 rounded-full text-sm font-medium hover:bg-bakery hover:text-white transition">Order now</button>
+                </div>
+            </div>
+            <div class="feature-card p-6 rounded-3xl border border-bakery/20 dark:border-bakery/30 bg-white dark:bg-[#1E1A17] shadow-sm hover:shadow-xl hover:border-bakery hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                <div>
+                    <div class="w-full h-52 overflow-hidden rounded-2xl mb-5">
+                        <img src="assets/cake3.jpg" alt="Lemon Drizzle" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-1 text-gray-900 dark:text-white group-hover:text-bakery transition">Lemon Drizzle</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Zesty glaze, poppy seed sponge</p>
+                </div>
+                <div>
+                    <span class="inline-block mt-4 text-bakery font-bold text-2xl">$38</span>
+                    <button class="mt-4 w-full py-2.5 border border-bakery/40 rounded-full text-sm font-medium hover:bg-bakery hover:text-white transition">Order now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== 3. DAILY SPECIALS (two featured items) ========== -->
+<section class="py-20 bg-gradient-to-b from-[#F7ECE1] to-[#F2E0D0] dark:from-[#231C18] dark:to-[#1E1814] border-t border-bakery/20">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-12"><span class="px-4 py-1.5 bg-bakery/10 border border-bakery/20 rounded-full text-bakery font-mono text-xs tracking-wider uppercase font-bold inline-block">🥐 DAILY SPECIALS</span><h2 class="text-3xl font-display font-bold mt-2">Fresh today</h2></div>
+        <div class="flex flex-col gap-8 max-w-4xl mx-auto">
+            <div class="feature-card group flex flex-col md:flex-row items-center gap-6 bg-white dark:bg-[#1E1A17] rounded-2xl p-5 shadow-sm">
+                <div class="w-full md:w-2/5 h-48 overflow-hidden rounded-xl">
+                    <img src="assets/almond-croissant.jpg" alt="Almond Croissant" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="w-full md:w-3/5 text-center md:text-start">
+                    <div class="text-bakery text-xs mb-1">★ SPECIAL</div>
+                    <h3 class="text-xl font-bold">Almond Croissant</h3>
+                    <p class="text-gray-500 text-sm">Flaky, buttery, filled with almond cream</p>
+                    <div class="flex items-center justify-center md:justify-between mt-3 gap-4"><span class="text-xl font-bold text-bakery">$6.50</span><button class="px-5 py-2 border border-bakery rounded-full text-sm hover:bg-bakery hover:text-white transition">Order</button></div>
+                </div>
+            </div>
+            <div class="feature-card group flex flex-col md:flex-row-reverse items-center gap-6 bg-white dark:bg-[#1E1A17] rounded-2xl p-5 shadow-sm">
+                <div class="w-full md:w-2/5 h-48 overflow-hidden rounded-xl">
+                    <img src="assets/cake5.jpg" alt="Berry & Oat Slice" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="w-full md:w-3/5 text-center md:text-start">
+                    <div class="text-bakery text-xs mb-1">🌿 VEGAN</div>
+                    <h3 class="text-xl font-bold">Berry & Oat Slice</h3>
+                    <p class="text-gray-500 text-sm">Mixed berries, oat crumble topping</p>
+                    <div class="flex items-center justify-center md:justify-between mt-3 gap-4"><span class="text-xl font-bold text-bakery">$5.90</span><button class="px-5 py-2 border border-bakery rounded-full text-sm hover:bg-bakery hover:text-white transition">Order</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SECTION 4: ARTISAN PROCESS ===== -->
+<section id="about" class="py-24 bg-white dark:bg-[#161210] border-t border-bakery/20">
+    <div class="container mx-auto px-6">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="px-4 py-1.5 bg-bakery/10 border border-bakery/20 rounded-full text-bakery font-mono text-xs tracking-wider uppercase font-bold inline-block">🌾 FROM SCRATCH</span>
+            <h2 class="text-4xl font-display font-bold mt-4">Baked with <span class="text-bakery">tradition</span></h2>
+        </div>
+        <div class="grid md:grid-cols-4 gap-8">
+            <div class="text-center">
+                <div class="w-20 h-20 bg-bakery text-white rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-5 shadow-lg">1</div>
+                <h4 class="font-bold text-xl">Sourdough starter</h4>
+                <p class="text-gray-500 text-sm">24h fermented, wild yeast</p>
+            </div>
+            <div class="text-center">
+                <div class="w-20 h-20 bg-bakery text-white rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-5 shadow-lg">2</div>
+                <h4 class="font-bold text-xl">Hand-kneaded</h4>
+                <p class="text-gray-500 text-sm">Artisan technique, slow proof</p>
+            </div>
+            <div class="text-center">
+                <div class="w-20 h-20 bg-bakery text-white rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-5 shadow-lg">3</div>
+                <h4 class="font-bold text-xl">Stone-baked</h4>
+                <p class="text-gray-500 text-sm">Crispy crust, even heat</p>
+            </div>
+            <div class="text-center">
+                <div class="w-20 h-20 bg-bakery text-white rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-5 shadow-lg">4</div>
+                <h4 class="font-bold text-xl">Fresh daily</h4>
+                <p class="text-gray-500 text-sm">Warm & ready by 7am</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- ========== 5. CUSTOM CAKE ORDERS ========== -->
+<section id="custom-orders" class="py-24 bg-gradient-to-r from-[#F5E5D5]/80 via-[#FAF0E6] to-[#F5E5D5]/80 dark:from-[#231B16] dark:via-[#1D1612] dark:to-[#231B16] border-t border-bakery/20">
+    <div class="container mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="relative order-2 lg:order-1">
+                <div class="rounded-3xl overflow-hidden shadow-2xl"><img src="assets/cake6.jpg" alt="Custom cake" class="w-full object-cover h-[400px]"></div>
+                <div class="absolute -bottom-5 -left-5 w-32 h-32 bg-bakery/30 rounded-full blur-2xl"></div>
+            </div>
+            <div class="order-1 lg:order-2"><span class="px-4 py-1.5 bg-bakery/10 border border-bakery/20 rounded-full text-bakery font-mono text-xs tracking-wider uppercase font-bold inline-block mb-4">🎂 CUSTOM ORDERS</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mt-2">Your dream <span class="text-bakery">cake</span></h2>
+                <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-5">Tell us your vision — flavour, filling, frosting, and decoration. We'll bring it to life for your special occasion.</p>
+                <button class="btn-primary"><i class="fas fa-pencil-alt"></i> Start your custom cake</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- ========== 6. TESTIMONIAL / COMMUNITY ========== -->
+<section id="community" class="py-24 relative overflow-hidden bg-white dark:bg-[#161210] border-t border-bakery/20">
+    <!-- Ambient glow blur -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-bakery/10 rounded-full blur-[120px] pointer-events-none -z-0"></div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <!-- Section Header -->
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="px-4 py-1.5 bg-bakery/10 border border-bakery/20 rounded-full text-bakery font-mono text-xs tracking-wider uppercase font-bold inline-flex items-center gap-1.5">
+                <i class="fas fa-heart text-bakery text-xs"></i> COMMUNITY STORIES
+            </span>
+            <h2 class="text-4xl md:text-5xl font-display font-bold mt-4">
+                Loved by <span class="text-bakery font-serif italic">our neighbours</span>
+            </h2>
+            <p class="text-gray-600 dark:text-gray-300 mt-3 text-base leading-relaxed">
+                From morning coffee runs to birthday celebrations — hear why our community chooses <span class="font-semibold text-gray-900 dark:text-white">The Daily Dough</span> every day.
+            </p>
+        </div>
+
+        <!-- Testimonial Cards Grid -->
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <div class="bg-white/90 dark:bg-[#1E1A17]/90 backdrop-blur-md p-8 rounded-3xl border border-bakery/20 shadow-lg hover:shadow-2xl hover:border-bakery/50 transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between relative group">
+                <div class="absolute top-6 right-6 text-bakery/15 text-5xl font-serif select-none">“</div>
+                <div>
+                    <!-- Star Rating -->
+                    <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-200 text-base leading-relaxed italic mb-6">
+                        “The best sourdough in town — golden crispy crust, chewy open crumb, and that incredible wild yeast aroma every single morning!”
+                    </p>
+                </div>
+                <div>
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100 dark:border-gray-800">
+                        <img src="assets/avatar-elena.jpg" alt="Elena Rostova" class="w-11 h-11 rounded-full object-cover object-top ring-2 ring-bakery/30">
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-white text-sm">Elena Rostova</h4>
+                            <span class="text-xs text-bakery font-medium flex items-center gap-1"><i class="fas fa-circle-check text-[10px]"></i> Verified Buyer</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 inline-block bg-bakery/10 text-bakery-dark dark:text-bakery-light px-3 py-1 rounded-full text-xs font-mono">
+                        🥖 Favourite: Honey Oat Sourdough
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 (Featured) -->
+            <div class="bg-white dark:bg-[#1E1A17] p-8 rounded-3xl border-2 border-bakery shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between relative group">
+                
+                <div class="absolute top-6 right-6 text-bakery/20 text-5xl font-serif select-none">“</div>
+                <div>
+                    <!-- Star Rating -->
+                    <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-200 text-base leading-relaxed italic mb-6">
+                        “My daughter's custom birthday cake was a complete masterpiece! Visually breathtaking and incredibly moist. Thank you team!”
+                    </p>
+                </div>
+                <div>
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100 dark:border-gray-800">
+                        <img src="assets/avatar-marcus.jpg" alt="Marcus Thorne" class="w-11 h-11 rounded-full object-cover object-top ring-2 ring-bakery/30">
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-white text-sm">Marcus</h4>
+                            <span class="text-xs text-bakery font-medium flex items-center gap-1"><i class="fas fa-circle-check text-[10px]"></i>Event Host</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 inline-block bg-bakery/10 text-bakery-dark dark:text-bakery-light px-3 py-1 rounded-full text-xs font-mono">
+                        🎂 Favourite: Custom Red Velvet
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white/90 dark:bg-[#1E1A17]/90 backdrop-blur-md p-8 rounded-3xl border border-bakery/20 shadow-lg hover:shadow-2xl hover:border-bakery/50 transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between relative group">
+                <div class="absolute top-6 right-6 text-bakery/15 text-5xl font-serif select-none">“</div>
+                <div>
+                    <!-- Star Rating -->
+                    <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-200 text-base leading-relaxed italic mb-6">
+                        “Warm almond croissants at 7:30 AM every Saturday is my ultimate weekend ritual. Flaky, buttery perfection!”
+                    </p>
+                </div>
+                <div>
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100 dark:border-gray-800">
+                        <img src="assets/avatar-sophia.jpg" alt="Sophia Chen" class="w-11 h-11 rounded-full object-cover object-top ring-2 ring-bakery/30">
+                        <div>
+                            <h4 class="font-bold text-gray-900 dark:text-white text-sm">Sophia Chen</h4>
+                            <span class="text-xs text-bakery font-medium flex items-center gap-1"><i class="fas fa-circle-check text-[10px]"></i> Daily Regular</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 inline-block bg-bakery/10 text-bakery-dark dark:text-bakery-light px-3 py-1 rounded-full text-xs font-mono">
+                        🥐 Favourite: Almond Croissant
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        </div>
+    </div>
+</section>
+
+<!-- ========== 7. TASTEFUL FINISHING CTA CARD ========== -->
+<section class="py-20 bg-[#F8EEE4] dark:bg-[#1C1714] border-t border-bakery/20">
+    <div class="container mx-auto px-6">
+        <div class="bg-gradient-to-r from-cream via-white to-cream dark:from-[#1E1A17] dark:via-[#241E1A] dark:to-[#1E1A17] border border-bakery/30 rounded-3xl p-10 md:p-14 text-center max-w-4xl mx-auto shadow-xl relative overflow-hidden group">
+            <!-- Subtle bakery glow background effect -->
+            <div class="absolute -top-16 -right-16 w-48 h-48 bg-bakery/15 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="absolute -bottom-16 -left-16 w-48 h-48 bg-bakery/15 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div class="relative z-10">
+                <span class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-bakery/10 border border-bakery/20 text-bakery text-xs font-mono font-bold tracking-widest uppercase mb-4">
+                    🥐 FRESH EVERY MORNING
+                </span>
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-gray-900 dark:text-white">
+                    Ready to taste <span class="text-bakery font-serif italic">the difference?</span>
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 mt-3 text-base max-w-xl mx-auto leading-relaxed">
+                    Stop by our local bakehouse at 88 Baker Street or order online for fast 2-hour express pickup.
+                </p>
+                <div class="flex flex-wrap items-center justify-center gap-4 mt-8">
+                    <a href="products.html" class="btn-primary px-7 py-3 text-sm shadow-md hover:shadow-lg">
+                        <i class="fas fa-shopping-bag"></i> Order Online
+                    </a>
+                    <a href="contact.html" class="btn-outline px-7 py-3 text-sm">
+                        <i class="fas fa-map-marker-alt"></i> Store Location
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FOOTER (same structure) ========== -->
+<footer id="contact" class="pt-16 pb-8 bg-gray-900 dark:bg-[#0A0A0A]">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <div class="text-center md:text-start">
+                <div class="flex items-center gap-3 mb-6 justify-center md:justify-start">
+                    <div class="bg-bakery/10 px-5 py-2 rounded-full border border-bakery/30 flex items-center gap-3">
+                        <div class="w-7 h-7 rounded-full bg-bakery/20 flex items-center justify-center text-bakery text-xs shrink-0">
+                            <i class="fas fa-bread-slice"></i>
+                        </div>
+                        <span class="text-base font-display font-bold text-white tracking-tight whitespace-nowrap">The Daily <span class="text-bakery">Dough</span></span>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-[16px] leading-relaxed mb-6">Artisan bakery & cake shop — made from scratch, with love.</p>
+                <div class="flex gap-3 justify-center md:justify-start">
+                    <a href="#" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" title="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="text-center md:text-start"><h3 class="text-white text-xl font-display font-bold mb-5 footer-heading">Explore</h3><ul class="space-y-2 text-gray-400"><li><a href="#" class="hover:text-bakery transition block">Cakes</a></li><li><a href="#" class="hover:text-bakery transition block">Pastries</a></li><li><a href="#" class="hover:text-bakery transition block">Breads</a></li><li><a href="#" class="hover:text-bakery transition block">Seasonal</a></li></ul></div>
+            <div class="text-center md:text-start"><h3 class="text-white text-xl font-display font-bold mb-5 footer-heading">Services</h3><ul class="space-y-2 text-gray-400"><li><a href="#" class="hover:text-bakery transition block">Custom Cakes</a></li><li><a href="#" class="hover:text-bakery transition block">Catering</a></li><li><a href="#" class="hover:text-bakery transition block">Corporate</a></li><li><a href="#" class="hover:text-bakery transition block">Gift boxes</a></li></ul></div>
+            <div class="text-center md:text-start"><h3 class="text-white text-xl font-display font-bold mb-5 footer-heading">Bakery</h3><ul class="space-y-3 text-gray-400"><li class="footer-contact-item justify-center md:justify-start"><i class="fas fa-map-marker-alt"></i><span>88 Baker Street, LA</span></li><li class="footer-contact-item justify-center md:justify-start"><i class="fas fa-phone"></i><span>+1 (323) 555-0271</span></li><li class="footer-contact-item justify-center md:justify-start"><i class="fas fa-envelope"></i><span>hello@thedailydough.com</span></li></ul></div>
+        </div>
+        <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-xs font-mono"><p>© 2026 The Daily Dough — baked fresh daily. #TasteTheTradition</p></div>
+    </div>
+</footer>
+
+<!-- ========== SCRIPT (identical behavior) ========== -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeBtnMob = document.getElementById('theme-toggle-mobile');
+        const updateThemeUI = (isDark) => { [themeBtn, themeBtnMob].forEach(b => { if (b) { const moon = b.querySelector('.fa-moon'); const sun = b.querySelector('.fa-sun'); if (moon && sun) { if (isDark) { moon.classList.add('hidden'); sun.classList.remove('hidden'); } else { moon.classList.remove('hidden'); sun.classList.add('hidden'); } } } }); };
+        const toggleTheme = () => { document.documentElement.classList.toggle('dark'); const isDark = document.documentElement.classList.contains('dark'); localStorage.setItem('theme', isDark ? 'dark' : 'light'); updateThemeUI(isDark); };
+        if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+        if (themeBtnMob) themeBtnMob.addEventListener('click', toggleTheme);
+        if (localStorage.getItem('theme') === 'dark') { document.documentElement.classList.add('dark'); updateThemeUI(true); }
+        const rtlBtn = document.getElementById('rtl-toggle');
+        const rtlMob = document.getElementById('rtl-toggle-mobile');
+        const updateRtlUI = (isRtl) => { const dir = isRtl ? 'rtl' : 'ltr'; document.documentElement.dir = dir; document.body.dir = dir; [rtlBtn, rtlMob].forEach(b => b && b.classList.toggle('active', isRtl)); };
+        const toggleRtl = () => { const isRtl = document.documentElement.dir !== 'rtl'; localStorage.setItem('dir', isRtl ? 'rtl' : 'ltr'); updateRtlUI(isRtl); };
+        if (rtlBtn) rtlBtn.addEventListener('click', toggleRtl);
+        if (rtlMob) rtlMob.addEventListener('click', toggleRtl);
+        if (localStorage.getItem('dir') === 'rtl') updateRtlUI(true);
+
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const icon = mobileToggle?.querySelector('i');
+        if (mobileToggle) { mobileToggle.addEventListener('click', () => { mobileMenu.classList.toggle('open'); icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-times'); document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : ''; }); }
+        document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => { btn.addEventListener('click', () => { const content = btn.nextElementSibling; content.classList.toggle('show'); const chevron = btn.querySelector('.fa-chevron-down'); if (chevron) chevron.style.transform = content.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0)'; }); });
+        document.querySelectorAll('.dropdown').forEach(dropdown => { const btn = dropdown.querySelector('button'); if (btn) { btn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); document.querySelectorAll('.dropdown').forEach(d => { if (d !== dropdown) d.classList.remove('open'); }); dropdown.classList.toggle('open'); }); } });
+        document.addEventListener('click', (e) => { if (!e.target.closest('.dropdown')) { document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open')); } });
+    });
+</script>
+</body>
+</html>

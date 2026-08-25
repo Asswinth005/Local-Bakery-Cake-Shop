@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact · The Daily Dough | Artisan Bakery & Cake Shop</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='78' font-size='78' text-anchor='middle'%3E🧁%3C/text%3E%3C/svg%3E">
+    <meta name="description" content="Contact The Daily Dough bakery — visit us, call, or send us a message.">
+
+    <!-- Tailwind CSS -->
+    <script src="tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'bakery': '#D97A4A',
+                        'bakery-dark': '#B45F3A',
+                        'bakery-light': '#F0C9A0',
+                        'bakery-glow': '#F7D9B0',
+                        'cream': '#FEF7F0',
+                        'canvas-light': '#FDF8F2',
+                        'canvas-dark': '#1E1A17',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Syne', 'sans-serif'],
+                        'mono': ['Space Mono', 'monospace'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'shimmer': 'shimmer 3s linear infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'marquee': 'marquee 20s linear infinite',
+                        'scale-up': 'scaleUp 0.5s ease-out',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'spin-slow': 'spinSlow 10s linear infinite',
+                        'bounce-gentle': 'bounceGentle 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: { '0%, 100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-15px)' } },
+                        shimmer: { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+                        marquee: { '0%': { transform: 'translateX(0%)' }, '100%': { transform: 'translateX(-50%)' } },
+                        scaleUp: { '0%': { transform: 'scale(0.95)', opacity: '0' }, '100%': { transform: 'scale(1)', opacity: '1' } },
+                        fadeInUp: { '0%': { opacity: '0', transform: 'translateY(20px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                        spinSlow: { '0%': { transform: 'rotate(0deg)' }, '100%': { transform: 'rotate(360deg)' } },
+                        bounceGentle: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; scrollbar-width: none; -ms-overflow-style: none; }
+        body::-webkit-scrollbar { display: none; }
+
+        /* Navigation */
+        .nav-item { position: relative; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.02em; transition: color 0.3s; padding: 0.5rem 0; }
+        .nav-item:hover, .nav-item.active { color: #D97A4A; }
+        .nav-item.active { font-weight: 700; }
+        .nav-item::after { content: ''; position: absolute; bottom: 0; inset-inline-start: 0; width: 0; height: 2px; background: #D97A4A; transition: width 0.3s; }
+        .nav-item:hover::after { width: 100%; }
+        .dropdown { position: relative; }
+        .dropdown-menu { position: absolute; top: 100%; inset-inline-start: 0; min-width: 200px; background: #FFFFFF; border-radius: 16px; padding: 0.5rem 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s; z-index: 1000; border: 1px solid #D97A4A30; box-shadow: 0 15px 35px rgba(0,0,0,0.08); text-align: start; }
+        .dropdown-menu.dropdown-right { inset-inline-start: auto; inset-inline-end: 0; }
+        .dark .dropdown-menu { background: #1E1A17; border-color: #D97A4A40; }
+        .dropdown:hover .dropdown-menu, .dropdown.open .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-item { display: flex; align-items: center; padding: 0.6rem 1.2rem; gap: 10px; transition: all 0.2s; font-size: 0.85rem; }
+        .dropdown-item:hover { background: #D97A4A10; color: #D97A4A; padding-inline-start: 1.5rem; }
+        .dropdown-item.active { background: #D97A4A08; color: #D97A4A; font-weight: 700; border-inline-start: 3px solid #D97A4A; padding-inline-start: 1.5rem; }
+        .dropdown-item i { width: 18px; color: #D97A4A; }
+        .auth-btn { padding: 0.5rem 1.5rem; border-radius: 40px; font-weight: 500; font-size: 0.85rem; transition: all 0.3s; }
+        .auth-btn.login { background: transparent; border: 1.5px solid #D97A4A; color: #D97A4A; }
+        .auth-btn.login:hover { background: #D97A4A; color: white; }
+        .auth-btn.signup { background: #D97A4A; color: white; }
+        .auth-btn.signup:hover { background: #B45F3A; transform: translateY(-2px); }
+        .toggle-btn { width: 36px; height: 36px; border-radius: 40px; background: #F0EDE8; color: #D97A4A; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+        .dark .toggle-btn { background: #2A2520; color: #FFFFFF; }
+        .toggle-btn:hover, .toggle-btn.active { background: #D97A4A; color: white; transform: rotate(10deg); }
+
+        .btn-primary { background: #D97A4A; color: white; padding: 0.8rem 2rem; border-radius: 60px; font-weight: 600; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-primary:hover { background: #B45F3A; transform: scale(1.03); }
+        .btn-outline { border: 2px solid #D97A4A; background: transparent; color: #D97A4A; padding: 0.75rem 2rem; border-radius: 60px; font-weight: 600; transition: all 0.3s; }
+        .btn-outline:hover { background: #D97A4A; color: white; }
+
+        .social-icon { width: 40px; height: 40px; background: #2A2520; display: inline-flex; align-items: center; justify-content: center; border-radius: 60px; transition: all 0.3s; color: #D97A4A; }
+        .social-icon:hover { background: #D97A4A; color: white; transform: translateY(-3px); }
+
+        .mobile-menu { background: #FFFFFF; max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+        .dark .mobile-menu { background: #1E1A17; }
+        .mobile-menu.open { max-height: 80vh; overflow-y: auto; }
+        .mobile-menu-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #E8E4DF; font-weight: 500; transition: all 0.3s; text-align: start; }
+        .dark .mobile-menu-item { border-bottom-color: #2A2520; }
+        .mobile-menu-item.active, .mobile-dropdown-content a.active { border-inline-start: 4px solid #D97A4A; border-left: none; background: #D97A4A08; color: #D97A4A; font-weight: 700; }
+        .mobile-dropdown-content { max-height: 0; overflow: hidden; transition: max-height 0.3s; background: #F8F4EF; text-align: start; }
+        .dark .mobile-dropdown-content { background: #1E1A17; }
+        .mobile-dropdown-content.show { max-height: 180px; }
+
+        [dir="rtl"] .fa-arrow-right, [dir="rtl"] .fa-chevron-right { transform: scaleX(-1); }
+        [dir="rtl"] .fa-arrow-left, [dir="rtl"] .fa-chevron-left { transform: scaleX(-1); }
+
+        .footer-heading { position: relative; padding-bottom: 0.5rem; display: inline-block; }
+        @media (min-width: 768px) { .footer-heading { display: block; padding-bottom: 0; border-inline-start: 3px solid #D97A4A; padding-inline-start: 0.75rem; } }
+        .footer-contact-item { display: flex; gap: 0.75rem; align-items: center; }
+        .footer-contact-item i { width: 20px; color: #D97A4A; }
+
+        .shimmer-text {
+            background: linear-gradient(120deg, #D97A4A, #F0C9A0, #D97A4A, #B45F3A);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
+
+        .hero-contact {
+            background: linear-gradient(160deg, #FDF8F2 0%, #E8D5C4 100%);
+        }
+        .dark .hero-contact {
+            background: linear-gradient(160deg, #1E1A17 0%, #14110F 100%);
+        }
+
+        /* Form styling */
+        .form-input {
+            width: 100%;
+            padding: 0.85rem 1.2rem;
+            border-radius: 16px;
+            border: 1.5px solid #E8E4DF;
+            background: white;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            color: #1E1A17;
+        }
+        .dark .form-input {
+            background: #1E1A17;
+            border-color: #3A3530;
+            color: #FDF8F2;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #D97A4A;
+            box-shadow: 0 0 0 3px rgba(217, 122, 74, 0.2);
+        }
+        .dark .form-input:focus {
+            border-color: #D97A4A;
+            box-shadow: 0 0 0 3px rgba(217, 122, 74, 0.25);
+        }
+        .form-input::placeholder {
+            color: #9CA3AF;
+        }
+        .dark .form-input::placeholder {
+            color: #6B7280;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            color: #1E1A17;
+        }
+        .dark .form-label {
+            color: #FDF8F2;
+        }
+
+        textarea.form-input {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.85rem 1.2rem;
+            border-radius: 16px;
+            border: 1.5px solid #E8E4DF;
+            background: white;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            color: #1E1A17;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239CA3AF' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.2rem center;
+        }
+        .dark .form-select {
+            background: #1E1A17;
+            border-color: #3A3530;
+            color: #FDF8F2;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+        }
+        .form-select:focus {
+            outline: none;
+            border-color: #D97A4A;
+            box-shadow: 0 0 0 3px rgba(217, 122, 74, 0.2);
+        }
+        .dark .form-select:focus {
+            border-color: #D97A4A;
+            box-shadow: 0 0 0 3px rgba(217, 122, 74, 0.25);
+        }
+
+        .contact-card {
+            background: #FFFFFF;
+            border-radius: 24px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(217, 122, 74, 0.08);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        .dark .contact-card {
+            background: #1E1A17;
+            border-color: rgba(217, 122, 74, 0.12);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .contact-card:hover {
+            transform: translateY(-4px);
+            border-color: #D97A4A;
+            box-shadow: 0 12px 24px rgba(217, 122, 74, 0.1);
+        }
+        .contact-card .icon-wrapper {
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            background: #D97A4A10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: #D97A4A;
+        }
+        .dark .contact-card .icon-wrapper {
+            background: #D97A4A15;
+        }
+
+        .map-placeholder {
+            background: #E8E4DF;
+            border-radius: 24px;
+            overflow: hidden;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9CA3AF;
+        }
+        .dark .map-placeholder {
+            background: #2A2520;
+            color: #6B7280;
+        }
+    </style>
+</head>
+<body class="bg-canvas-light dark:bg-canvas-dark text-gray-900 dark:text-gray-100">
+
+<!-- ====== HEADER (exactly as reference) ====== -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-canvas-dark/95 backdrop-blur-md border-b border-bakery/30">
+    <div class="container mx-auto px-6">
+        <div class="flex items-center justify-between h-20 relative">
+            <a href="index.html" class="flex items-center group">
+                <div class="bg-white dark:bg-[#1E1A17] px-5 py-2 rounded-full flex items-center shadow-sm border border-bakery/25 group-hover:border-bakery transition-all duration-300 gap-3">
+                    <div class="w-7 h-7 rounded-full bg-bakery/15 dark:bg-bakery/25 flex items-center justify-center text-bakery dark:text-bakery-light text-xs shrink-0">
+                        <i class="fas fa-bread-slice"></i>
+                    </div>
+                    <span class="text-base font-sans font-bold text-gray-900 dark:text-white tracking-tight whitespace-nowrap" style="font-family: 'Inter', system-ui, sans-serif !important;">The Daily <span class="text-bakery">Dough</span></span>
+                </div>
+            </a>
+
+            <!-- desktop nav -->
+            <div class="hidden xl:flex items-center justify-center absolute left-1/2 -translate-x-1/2">
+                <div class="flex items-center gap-7">
+                    <div class="dropdown">
+                        <button class="nav-item flex items-center gap-1">Home <i class="fas fa-chevron-down text-[10px]"></i></button>
+                        <div class="dropdown-menu">
+                            <a href="index.html" class="dropdown-item">Home 1</a>
+                            <a href="home2.html" class="dropdown-item">Home 2</a>
+                        </div>
+                    </div>
+                    <a href="about.html" class="nav-item">About</a>
+                    <div class="dropdown">
+                        <button class="nav-item flex items-center gap-1">Products <i class="fas fa-chevron-down text-[10px]"></i></button>
+                        <div class="dropdown-menu">
+                            <a href="signature-cakes.html" class="dropdown-item">Signature Cakes</a>
+                            <a href="fresh-pastries.html" class="dropdown-item">Fresh Pastries</a>
+                            <a href="artisan-breads.html" class="dropdown-item">Artisan Breads</a>
+                        </div>
+                    </div>
+                    <a href="pricing.html" class="nav-item">Pricing</a>
+                    <a href="custom-orders.html" class="nav-item">Custom Orders</a>
+                    <a href="contact.html" class="nav-item active">Contact</a>
+                </div>
+            </div>
+
+            <div class="hidden xl:flex items-center gap-3 ms-auto me-4">
+                <button id="theme-toggle" class="toggle-btn" title="Toggle theme"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+                <button id="rtl-toggle" class="toggle-btn" title="Toggle RTL">⇄</button>
+                <div class="dropdown">
+                    <button class="toggle-btn flex items-center justify-center text-lg" title="Account authentication">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-right !min-w-[170px] shadow-xl">
+                        <a href="login.html" class="dropdown-item">Login</a>
+                        <a href="signup.html" class="dropdown-item">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+            <button id="mobile-toggle" class="xl:hidden text-gray-800 dark:text-white p-2 text-2xl"><i class="fas fa-bars"></i></button>
+        </div>
+
+        <!-- mobile menu -->
+        <div id="mobile-menu" class="mobile-menu xl:hidden">
+            <div class="mobile-dropdown">
+                <button class="mobile-dropdown-btn flex justify-between items-center w-full mobile-menu-item">Home <i class="fas fa-chevron-down text-xs"></i></button>
+                <div class="mobile-dropdown-content">
+                    <a href="index.html" class="block px-8 py-2 text-sm">Home 1</a>
+                    <a href="home2.html" class="block px-8 py-2 text-sm">Home 2</a>
+                </div>
+            </div>
+            <a href="about.html" class="mobile-menu-item">About</a>
+            <div class="mobile-dropdown">
+                <button class="mobile-dropdown-btn flex justify-between items-center w-full mobile-menu-item">Products <i class="fas fa-chevron-down text-xs"></i></button>
+                <div class="mobile-dropdown-content">
+                    <a href="signature-cakes.html" class="block px-8 py-2 text-sm">Signature Cakes</a>
+                    <a href="fresh-pastries.html" class="block px-8 py-2 text-sm">Fresh Pastries</a>
+                    <a href="artisan-breads.html" class="block px-8 py-2 text-sm">Artisan Breads</a>
+                </div>
+            </div>
+            <a href="pricing.html" class="mobile-menu-item">Pricing</a>
+            <a href="custom-orders.html" class="mobile-menu-item">Custom Orders</a>
+            <a href="contact.html" class="mobile-menu-item active">Contact</a>
+            <div class="p-4 px-6 border-t border-bakery/20 space-y-3">
+                <div class="flex items-center gap-3">
+                    <a href="login.html" class="auth-btn login flex-1 text-center py-2 text-xs font-semibold">Login</a>
+                    <a href="signup.html" class="auth-btn signup flex-1 text-center py-2 text-xs font-semibold">Sign Up</a>
+                </div>
+                <div class="flex items-center justify-center gap-3 pt-1">
+                    <button id="theme-toggle-mobile" class="toggle-btn" title="Toggle theme"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+                    <button id="rtl-toggle-mobile" class="toggle-btn" title="Toggle RTL">⇄</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ====== HERO ====== -->
+<section class="hero-contact min-h-[48vh] flex items-center justify-center pt-36 pb-24 md:pt-44 md:pb-32 overflow-hidden relative">
+    <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+    <img src="assets/p7.jpg" alt="Hero background" class="w-full h-full object-cover opacity-15 dark:opacity-20 scale-105">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#FDF8F2]/88 via-[#FDF8F2]/78 to-[#FDF8F2] dark:from-[#1E1A17]/88 dark:via-[#1E1A17]/82 dark:to-[#1E1A17]"></div>
+  </div>
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="text-center max-w-3xl mx-auto">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-bakery/10 border border-bakery/20 text-bakery text-xs font-mono font-bold tracking-widest uppercase">
+                <i class="fas fa-phone"></i> Get in Touch
+            </span>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mt-4 leading-[1.1]">
+                Let's <span class="shimmer-text">connect</span>
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300 mt-4 max-w-xl mx-auto leading-relaxed">
+                Visit us at the bakery, give us a call, or send a message — we'd love to hear from you.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ====== CONTACT INFO CARDS ====== -->
+<section class="py-8 bg-white dark:bg-[#161210]">
+    <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            
+            <!-- Visit Us -->
+            <div class="contact-card text-center">
+                <div class="icon-wrapper mx-auto mb-4"> <i class="fas fa-map-marker-alt"></i> </div>
+                <h3 class="font-bold text-lg text-gray-900 dark:text-white">Visit Us</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">88 Baker Street</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">Los Angeles, CA 90001</p>
+                <a href="#" class="inline-block mt-3 text-sm text-bakery font-medium hover:underline">
+                    Get directions <i class="fas fa-arrow-right text-xs ml-1"></i>
+                </a>
+            </div>
+
+            <!-- Call Us -->
+            <div class="contact-card text-center">
+                <div class="icon-wrapper mx-auto mb-4"> <i class="fas fa-phone"></i> </div>
+                <h3 class="font-bold text-lg text-gray-900 dark:text-white">Call Us</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">+1 (323) 555-0271</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">Mon–Sat, 7AM–7PM</p>
+                <a href="tel:+13235550271" class="inline-block mt-3 text-sm text-bakery font-medium hover:underline">
+                    Call now <i class="fas fa-arrow-right text-xs ml-1"></i>
+                </a>
+            </div>
+
+            <!-- Email Us -->
+            <div class="contact-card text-center">
+                <div class="icon-wrapper mx-auto mb-4"> <i class="fas fa-envelope"></i> </div>
+                <h3 class="font-bold text-lg text-gray-900 dark:text-white">Email Us</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">hello@thedailydough.com</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">We respond within 24h</p>
+                <a href="mailto:hello@thedailydough.com" class="inline-block mt-3 text-sm text-bakery font-medium hover:underline">
+                    Send email <i class="fas fa-arrow-right text-xs ml-1"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ====== CONTACT FORM + MAP ====== -->
+<section class="py-16 bg-[#F8F1EA] dark:bg-[#1C1714] border-t border-bakery/20">
+    <div class="container mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            
+            <!-- Form Card with Border -->
+            <div class="bg-white dark:bg-[#241E1A] p-8 md:p-10 rounded-3xl border border-bakery/25 dark:border-bakery/35 shadow-xl transition-all">
+                <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-bakery/10 border border-bakery/20 rounded-full text-bakery text-xs font-mono font-bold tracking-widest uppercase mb-4">
+                    <i class="fas fa-paper-plane"></i> Send a Message
+                </span>
+                <h2 class="text-3xl font-display font-bold mb-6">We'd love to <span class="text-bakery">hear from you</span></h2>
+                
+                <form id="contactForm" class="space-y-5">
+                    <div>
+                        <label class="form-label" for="contactName">Your Name *</label>
+                        <input type="text" id="contactName" class="form-input" placeholder="John Doe" required>
+                    </div>
+                    <div>
+                        <label class="form-label" for="contactEmail">Email Address *</label>
+                        <input type="email" id="contactEmail" class="form-input" placeholder="john@example.com" required>
+                    </div>
+                    <div>
+                        <label class="form-label" for="contactSubject">Subject *</label>
+                        <select id="contactSubject" class="form-select" required>
+                            <option value="">Select a subject...</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="custom-order">Custom Order</option>
+                            <option value="catering">Catering Request</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label" for="contactMessage">Message *</label>
+                        <textarea id="contactMessage" class="form-input" placeholder="Tell us how we can help..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary w-full justify-center">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 text-center">
+                        <i class="fas fa-lock text-bakery mr-1"></i> 
+                        Your information is safe with us. We'll never share your data.
+                    </p>
+                </form>
+            </div>
+
+            <!-- Map & Hours -->
+            <div>
+                <!-- Hours Card with Border -->
+                <div class="mb-8 bg-white dark:bg-[#241E1A] p-8 md:p-10 rounded-3xl border border-bakery/25 dark:border-bakery/35 shadow-xl transition-all">
+                    <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-bakery/10 border border-bakery/20 rounded-full text-bakery text-xs font-mono font-bold tracking-widest uppercase mb-4">
+                        <i class="fas fa-clock"></i> Hours
+                    </span>
+                    <h3 class="text-2xl md:text-3xl font-display font-bold mb-6 text-gray-900 dark:text-white">Visit us <span class="text-bakery">today</span></h3>
+                    <div class="space-y-3 text-gray-600 dark:text-gray-300 text-sm">
+                        <div class="flex justify-between py-2.5 border-b border-bakery/15 dark:border-bakery/20">
+                            <span class="font-medium text-gray-800 dark:text-gray-200">Monday – Friday</span>
+                            <span class="font-bold text-bakery">6:30 AM – 7:00 PM</span>
+                        </div>
+                        <div class="flex justify-between py-2.5 border-b border-bakery/15 dark:border-bakery/20">
+                            <span class="font-medium text-gray-800 dark:text-gray-200">Saturday</span>
+                            <span class="font-bold text-bakery">7:00 AM – 6:00 PM</span>
+                        </div>
+                        <div class="flex justify-between py-2.5">
+                            <span class="font-medium text-gray-800 dark:text-gray-200">Sunday</span>
+                            <span class="font-bold text-bakery">8:00 AM – 4:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map -->
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-bakery/10 border border-bakery/20 rounded-full text-bakery text-xs font-mono font-bold tracking-widest uppercase">
+                            <i class="fas fa-map-marked-alt"></i> Find Us
+                        </span>
+                        <a href="https://maps.google.com/?q=88+Baker+Street,+Los+Angeles,+CA+90001" target="_blank" rel="noopener noreferrer" class="text-xs text-bakery font-bold hover:underline flex items-center gap-1">
+                            Open in Google Maps <i class="fas fa-external-link-alt text-[10px]"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="rounded-3xl overflow-hidden shadow-lg border border-bakery/20 bg-white dark:bg-[#241E1A] p-2 relative group">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.7332480436006!2d-118.24368492348507!3d34.05223417315629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c75ddc27da13%3A0xe22fdf6f254608f4!2sLos%20Angeles%2C%20CA!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+                            width="100%" 
+                            height="300" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="The Daily Dough Location Map"
+                            class="w-full h-72 rounded-2xl shadow-inner transition-all duration-300">
+                        </iframe>
+                        <div class="px-4 py-3 flex items-center justify-between text-xs text-gray-600 dark:text-gray-300">
+                            <span class="flex items-center gap-2">
+                                <i class="fas fa-map-pin text-bakery"></i>
+                                <span>88 Baker Street, Los Angeles, CA 90001</span>
+                            </span>
+                            <span class="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Open Now
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ====== SOCIAL CONNECT ====== -->
+<section class="py-16 bg-white dark:bg-[#161210] border-t border-bakery/10">
+    <div class="container mx-auto px-6 text-center">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-bakery/10 border border-bakery/20 rounded-full text-bakery text-xs font-mono font-bold tracking-widest uppercase mb-4">
+            <i class="fas fa-share-alt"></i> Connect With Us
+        </span>
+        <h2 class="text-3xl font-display font-bold mb-6">Follow the <span class="text-bakery">freshness</span></h2>
+        <p class="text-gray-600 dark:text-gray-300 max-w-md mx-auto mb-8">Stay updated on daily specials, new creations, and behind-the-scenes moments.</p>
+        <div class="flex justify-center gap-4">
+            <a href="#" class="w-14 h-14 rounded-full bg-bakery/10 hover:bg-bakery text-bakery hover:text-white flex items-center justify-center text-xl transition-all duration-300">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="w-14 h-14 rounded-full bg-bakery/10 hover:bg-bakery text-bakery hover:text-white flex items-center justify-center text-xl transition-all duration-300">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="w-14 h-14 rounded-full bg-bakery/10 hover:bg-bakery text-bakery hover:text-white flex items-center justify-center text-xl transition-all duration-300">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ====== FOOTER (exactly as reference) ====== -->
+<footer id="contact" class="pt-16 pb-8 bg-gray-900 dark:bg-[#0A0A0A]">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <div class="text-center md:text-start">
+                <div class="flex items-center gap-3 mb-6 justify-center md:justify-start">
+                    <div class="bg-bakery/10 px-5 py-2 rounded-full border border-bakery/30 flex items-center gap-3">
+                        <div class="w-7 h-7 rounded-full bg-bakery/20 flex items-center justify-center text-bakery text-xs shrink-0">
+                            <i class="fas fa-bread-slice"></i>
+                        </div>
+                        <span class="text-base font-display font-bold text-white tracking-tight whitespace-nowrap">The Daily <span class="text-bakery">Dough</span></span>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-[16px] leading-relaxed mb-6">Artisan bakery & cake shop — made from scratch, with love.</p>
+                <div class="flex gap-3 justify-center md:justify-start">
+                    <a href="#" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" title="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="text-center md:text-start"><h3 class="text-white text-xl font-display font-bold mb-5 footer-heading">Explore</h3><ul class="space-y-2 text-gray-400"><li><a href="signature-cakes.html" class="hover:text-bakery transition block">Cakes</a></li><li><a href="fresh-pastries.html" class="hover:text-bakery transition block">Pastries</a></li><li><a href="artisan-breads.html" class="hover:text-bakery transition block">Breads</a></li><li><a href="#" class="hover:text-bakery transition block">Seasonal</a></li></ul></div>
+            <div class="text-center md:text-start"><h3 class="text-white text-xl font-display font-bold mb-5 footer-heading">Services</h3><ul class="space-y-2 text-gray-400"><li><a href="custom-orders.html" class="hover:text-bakery transition block">Custom Cakes</a></li><li><a href="#" class="hover:text-bakery transition block">Catering</a></li><li><a href="#" class="hover:text-bakery transition block">Corporate</a></li><li><a href="#" class="hover:text-bakery transition block">Gift boxes</a></li></ul></div>
+            <div class="text-center md:text-start"><h3 class="text-white text-xl font-display font-bold mb-5 footer-heading">Bakery</h3><ul class="space-y-3 text-gray-400"><li class="footer-contact-item justify-center md:justify-start"><i class="fas fa-map-marker-alt"></i><span>88 Baker Street, LA</span></li><li class="footer-contact-item justify-center md:justify-start"><i class="fas fa-phone"></i><span>+1 (323) 555-0271</span></li><li class="footer-contact-item justify-center md:justify-start"><i class="fas fa-envelope"></i><span>hello@thedailydough.com</span></li></ul></div>
+        </div>
+        <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-xs font-mono"><p>© 2026 The Daily Dough — baked fresh daily. #TasteTheTradition</p></div>
+    </div>
+</footer>
+
+<!-- ====== SCRIPT ====== -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeBtnMob = document.getElementById('theme-toggle-mobile');
+        const updateThemeUI = (isDark) => { [themeBtn, themeBtnMob].forEach(b => { if (b) { const moon = b.querySelector('.fa-moon'); const sun = b.querySelector('.fa-sun'); if (moon && sun) { if (isDark) { moon.classList.add('hidden'); sun.classList.remove('hidden'); } else { moon.classList.remove('hidden'); sun.classList.add('hidden'); } } } }); };
+        const toggleTheme = () => { document.documentElement.classList.toggle('dark'); const isDark = document.documentElement.classList.contains('dark'); localStorage.setItem('theme', isDark ? 'dark' : 'light'); updateThemeUI(isDark); };
+        if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+        if (themeBtnMob) themeBtnMob.addEventListener('click', toggleTheme);
+        if (localStorage.getItem('theme') === 'dark') { document.documentElement.classList.add('dark'); updateThemeUI(true); }
+        const rtlBtn = document.getElementById('rtl-toggle');
+        const rtlMob = document.getElementById('rtl-toggle-mobile');
+        const updateRtlUI = (isRtl) => { const dir = isRtl ? 'rtl' : 'ltr'; document.documentElement.dir = dir; document.body.dir = dir; [rtlBtn, rtlMob].forEach(b => b && b.classList.toggle('active', isRtl)); };
+        const toggleRtl = () => { const isRtl = document.documentElement.dir !== 'rtl'; localStorage.setItem('dir', isRtl ? 'rtl' : 'ltr'); updateRtlUI(isRtl); };
+        if (rtlBtn) rtlBtn.addEventListener('click', toggleRtl);
+        if (rtlMob) rtlMob.addEventListener('click', toggleRtl);
+        if (localStorage.getItem('dir') === 'rtl') updateRtlUI(true);
+
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const icon = mobileToggle?.querySelector('i');
+        if (mobileToggle) { mobileToggle.addEventListener('click', () => { mobileMenu.classList.toggle('open'); icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-times'); document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : ''; }); }
+        document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => { btn.addEventListener('click', () => { const content = btn.nextElementSibling; content.classList.toggle('show'); const chevron = btn.querySelector('.fa-chevron-down'); if (chevron) chevron.style.transform = content.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0)'; }); });
+        document.querySelectorAll('.dropdown').forEach(dropdown => { const btn = dropdown.querySelector('button'); if (btn) { btn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); document.querySelectorAll('.dropdown').forEach(d => { if (d !== dropdown) d.classList.remove('open'); }); dropdown.classList.toggle('open'); }); } });
+        document.addEventListener('click', (e) => { if (!e.target.closest('.dropdown')) { document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('open')); } });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('🍞 Thank you! Your message has been sent. We\'ll get back to you within 24 hours.');
+            this.reset();
+        });
+    });
+</script>
+</body>
+</html>
