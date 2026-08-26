@@ -333,7 +333,7 @@
   </div>
     <div class="container mx-auto px-6 relative z-10">
         <div class="text-center max-w-3xl mx-auto">
-            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-bakery/10 border border-bakery/20 text-bakery text-xs font-mono font-bold tracking-widest uppercase">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/92 dark:bg-[#1E1A17]/92 border border-bakery/45 text-[#B45F3A] dark:text-[#F0C9A0] shadow-sm text-xs font-mono font-bold tracking-widest uppercase">
                 <i class="fas fa-tag"></i> Transparent Pricing
             </span>
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mt-4 leading-[1.1]">
@@ -349,6 +349,18 @@
 <!-- ====== PRICING PLANS ====== -->
 <section class="py-16 bg-white dark:bg-[#161210]">
     <div class="container mx-auto px-6">
+
+        <!-- Section Heading -->
+        <div class="text-center mb-12">
+            <span class="px-4 py-1.5 bg-bakery/10 border border-bakery/20 rounded-full text-bakery font-mono text-xs tracking-wider uppercase font-bold inline-block">🏷️ PRICING PACKAGES</span>
+            <h2 class="text-3xl md:text-4xl font-display font-bold mt-3 text-gray-900 dark:text-white">
+                Flexible <span class="text-bakery">Pricing Plans</span>
+            </h2>
+            <p class="text-gray-600 dark:text-gray-400 mt-2 max-w-lg mx-auto">
+                Choose the perfect option for your daily cravings, family bundles, or special party gatherings.
+            </p>
+        </div>
+
         <div class="grid md:grid-cols-3 gap-5 lg:gap-8 max-w-6xl mx-auto items-stretch">
             
             <!-- Plan 1 - Single -->
@@ -852,7 +864,7 @@
             tableBody.innerHTML = filtered.map(item => `
                 <tr class="hover:bg-bakery/10 transition border-b border-bakery/20">
                     <td class="py-3.5 px-4 font-bold text-gray-900 dark:text-white border-r border-bakery/20">${item.name}</td>
-                    <td class="py-3.5 px-4 text-gray-500 dark:text-gray-400 border-r border-bakery/20"><span class="px-2.5 py-1 rounded-full bg-bakery/10 border border-bakery/20 text-bakery text-[10px] font-mono font-bold">${item.catLabel}</span></td>
+                    <td class="py-3.5 px-4 text-gray-500 dark:text-gray-400 border-r border-bakery/20"><span class="px-2.5 py-1 rounded-full bg-white/92 dark:bg-[#1E1A17]/92 border border-bakery/45 text-[#B45F3A] dark:text-[#F0C9A0] shadow-sm text-[10px] font-mono font-bold">${item.catLabel}</span></td>
                     <td class="py-3.5 px-4 font-semibold text-gray-800 dark:text-gray-200 border-r border-bakery/20">${item.single}</td>
                     <td class="py-3.5 px-4 font-bold text-bakery border-r border-bakery/20 bg-bakery/5 dark:bg-bakery/10">${item.bundle}</td>
                     <td class="py-3.5 px-4 font-medium text-gray-600 dark:text-gray-400">${item.party}</td>
