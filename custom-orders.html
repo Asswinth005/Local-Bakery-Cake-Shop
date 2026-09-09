@@ -131,15 +131,16 @@
             padding: 0.85rem 1.2rem;
             border-radius: 16px;
             border: 2px solid #D0C5B8;
-            background: white;
+            background-color: white;
             font-size: 0.95rem;
             transition: all 0.2s;
             color: #1E1A17;
         }
         .dark .form-input {
-            background: #161210;
+            background-color: #161210;
             border-color: #4A423A;
             color: #FDF8F2;
+            color-scheme: dark;
         }
         .form-input:hover, .form-select:hover {
             border-color: #D97A4A;
@@ -160,6 +161,16 @@
             color: #6B7280;
         }
 
+        /* Calendar picker icon styling for date inputs */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .dark input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: brightness(0) invert(1) !important;
+            opacity: 1 !important;
+        }
+
         .form-label {
             display: block;
             font-weight: 600;
@@ -176,20 +187,29 @@
             padding: 0.85rem 1.2rem;
             border-radius: 16px;
             border: 2px solid #D0C5B8;
-            background: white;
+            background-color: white;
             font-size: 0.95rem;
             transition: all 0.2s;
             color: #1E1A17;
+            -webkit-appearance: none;
+            -moz-appearance: none;
             appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239CA3AF' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 1.2rem center;
         }
         .dark .form-select {
-            background: #161210;
+            background-color: #161210;
             border-color: #4A423A;
             color: #FDF8F2;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            color-scheme: dark;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239CA3AF' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.2rem center;
+        }
+        .dark .form-select option {
+            background-color: #161210;
+            color: #FDF8F2;
         }
         .form-select:focus {
             outline: none;
