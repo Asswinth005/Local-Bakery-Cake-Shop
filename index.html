@@ -86,8 +86,10 @@
 
         .btn-primary { background: #D97A4A; color: white; padding: 0.8rem 2rem; border-radius: 60px; font-weight: 600; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; }
         .btn-primary:hover { background: #B45F3A; transform: scale(1.03); }
-        .btn-outline { border: 2px solid #D97A4A; background: transparent; color: #D97A4A; padding: 0.75rem 2rem; border-radius: 60px; font-weight: 600; transition: all 0.3s; }
-        .btn-outline:hover { background: #D97A4A; color: white; }
+        .btn-outline { border: 2px solid #C25424; background: transparent; color: #B44A1B; padding: 0.75rem 2rem; border-radius: 60px; font-weight: 600; transition: all 0.3s; }
+        .btn-outline:hover { background: #D97A4A; color: white; border-color: #D97A4A; }
+        .dark .btn-outline { border-color: #D97A4A; color: #F0C9A0; }
+        .dark .btn-outline:hover { background: #D97A4A; color: white; }
 
         .social-icon { width: 40px; height: 40px; background: #2A2520; display: inline-flex; align-items: center; justify-content: center; border-radius: 60px; transition: all 0.3s; color: #D97A4A; }
         .social-icon:hover { background: #D97A4A; color: white; transform: translateY(-3px); }
@@ -115,7 +117,8 @@
 
         .stats-card { background: rgba(217, 122, 74, 0.08); backdrop-filter: blur(8px); border-radius: 2rem; }
         .dark .stats-card { background: rgba(217, 122, 74, 0.15); }
-        .shimmer-text { background: linear-gradient(120deg, #D97A4A, #F0C9A0, #D97A4A, #B45F3A); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 3s linear infinite; }
+        .shimmer-text { background: linear-gradient(120deg, #A84317, #E06D38, #8F340F, #C25424); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 3s linear infinite; }
+        .dark .shimmer-text { background: linear-gradient(120deg, #E07A48, #F0C9A0, #E07A48, #C2633E); -webkit-background-clip: text; background-clip: text; }
     </style>
 </head>
 <body class="bg-canvas-light dark:bg-canvas-dark text-gray-900 dark:text-gray-100">
@@ -204,7 +207,7 @@
     <div class="container mx-auto px-6 relative z-10 flex-1 flex items-center py-4 md:py-8">
         <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full">
             <div class="order-1 lg:order-1">
-                <div class="inline-block mb-3"><span class="px-4 py-1.5 bg-bakery/10 border border-bakery/20 rounded-full text-bakery font-mono text-xs tracking-wider uppercase font-bold inline-block">🍰 TODAY'S SPECIAL</span></div>
+                <div class="inline-block mb-3"><span class="px-4 py-1.5 bg-bakery/10 dark:bg-bakery/15 border border-bakery/30 dark:border-bakery/40 rounded-full text-[#9C3D16] dark:text-[#F0C9A0] font-mono text-xs tracking-wider uppercase font-bold inline-block">🍰 TODAY'S SPECIAL</span></div>
                 <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.1] tracking-tight">Fresh from <span class="shimmer-text">the oven</span></h1>
                 <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 mt-4 max-w-lg leading-relaxed">Buttery croissants, signature layer cakes & daily artisan breads — baked with love since 1989.</p>
                 <div class="flex flex-wrap gap-4 mt-6">
@@ -212,11 +215,11 @@
                     <a href="contact.html" class="btn-outline"><i class="fas fa-utensils"></i> Order online</a>
                 </div>
                 <div class="flex items-center gap-6 mt-6 pt-2">
-                    <div><span class="font-bold text-xl md:text-2xl text-bakery">24+</span><p class="text-xs text-gray-500">Fresh bakes daily</p></div>
+                    <div><span class="font-bold text-xl md:text-2xl text-[#9C3D16] dark:text-bakery">24+</span><p class="text-xs text-gray-500">Fresh bakes daily</p></div>
                     <div class="w-px h-8 bg-bakery/30"></div>
-                    <div><span class="font-bold text-xl md:text-2xl text-bakery">7</span><p class="text-xs text-gray-500">Signature cakes</p></div>
+                    <div><span class="font-bold text-xl md:text-2xl text-[#9C3D16] dark:text-bakery">7</span><p class="text-xs text-gray-500">Signature cakes</p></div>
                     <div class="w-px h-8 bg-bakery/30"></div>
-                    <div><span class="font-bold text-xl md:text-2xl text-bakery">★</span><p class="text-xs text-gray-500">4.9 rating</p></div>
+                    <div><span class="font-bold text-xl md:text-2xl text-[#9C3D16] dark:text-bakery">★</span><p class="text-xs text-gray-500">4.9 rating</p></div>
                 </div>
             </div>
             <div class="relative order-2 lg:order-2 flex justify-center lg:justify-end">

@@ -80,8 +80,10 @@
     .feature-card:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 30px 40px -12px #D97A4A50; }
     .btn-primary { background: #D97A4A; color: white; padding: 0.8rem 2rem; border-radius: 60px; font-weight: 600; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; }
     .btn-primary:hover { background: #B45F3A; transform: scale(1.03); }
-    .btn-outline { border: 2px solid #D97A4A; background: transparent; color: #D97A4A; padding: 0.75rem 2rem; border-radius: 60px; font-weight: 600; transition: all 0.3s; }
-    .btn-outline:hover { background: #D97A4A; color: white; }
+    .btn-outline { border: 2px solid #C25424; background: transparent; color: #B44A1B; padding: 0.75rem 2rem; border-radius: 60px; font-weight: 600; transition: all 0.3s; }
+    .btn-outline:hover { background: #D97A4A; color: white; border-color: #D97A4A; }
+    .dark .btn-outline { border-color: #D97A4A; color: #F0C9A0; }
+    .dark .btn-outline:hover { background: #D97A4A; color: white; }
     .social-icon { width: 40px; height: 40px; background: #2A2520; display: inline-flex; align-items: center; justify-content: center; border-radius: 60px; transition: all 0.3s; color: #D97A4A; }
     .social-icon:hover { background: #D97A4A; color: white; transform: translateY(-3px); }
     .mobile-menu { background: #FFFFFF; max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
@@ -103,7 +105,8 @@
     .marquee-content { display: inline-flex; animation: marquee 22s linear infinite; gap: 3rem; }
     .stats-card { background: rgba(217, 122, 74, 0.08); backdrop-filter: blur(8px); border-radius: 2rem; }
     .dark .stats-card { background: rgba(217, 122, 74, 0.15); }
-    .shimmer-text { background: linear-gradient(120deg, #D97A4A, #F0C9A0, #D97A4A, #B45F3A); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 3s linear infinite; }
+    .shimmer-text { background: linear-gradient(120deg, #A84317, #E06D38, #8F340F, #C25424); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 3s linear infinite; }
+    .dark .shimmer-text { background: linear-gradient(120deg, #E07A48, #F0C9A0, #E07A48, #C2633E); -webkit-background-clip: text; background-clip: text; }
 
     /* about specific */
     .hero-about {
@@ -245,7 +248,7 @@
       
       <!-- Top Pill Tag -->
       <div class="flex flex-wrap items-center justify-center gap-3">
-        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/92 dark:bg-[#1E1A17]/92 border border-bakery/45 text-[#B45F3A] dark:text-[#F0C9A0] shadow-sm text-xs font-mono font-bold tracking-widest uppercase">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/92 dark:bg-[#1E1A17]/92 border border-bakery/45 text-[#9C3D16] dark:text-[#F0C9A0] shadow-sm text-xs font-mono font-bold tracking-widest uppercase">
           <i class="fas fa-heart"></i> Our Story
         </span>
       </div>
@@ -278,7 +281,7 @@
 <section id="values" class="py-20 bg-white dark:bg-[#161210] border-y border-bakery/10">
   <div class="container mx-auto px-6">
     <div class="text-center max-w-2xl mx-auto mb-14">
-      <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/92 dark:bg-[#1E1A17]/92 border border-bakery/45 text-[#B45F3A] dark:text-[#F0C9A0] shadow-sm text-xs font-mono font-bold tracking-widest uppercase">
+      <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/92 dark:bg-[#1E1A17]/92 border border-bakery/45 text-[#9C3D16] dark:text-[#F0C9A0] shadow-sm text-xs font-mono font-bold tracking-widest uppercase">
         <i class="fas fa-star"></i> what we stand for
       </span>
       <h2 class="text-3xl md:text-4xl font-display font-bold mt-3">Baked with <span class="text-bakery">purpose</span></h2>
